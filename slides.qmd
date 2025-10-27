@@ -1,0 +1,837 @@
+---
+title: "Efficient File Management in R with {fs}<br>![](images/witchy-jr-cat-fs.png){width=5em}"
+author: "Jadey Ryan // October 29, 2025<br>R-Ladies St. Louis"
+execute: 
+  echo: true
+format:
+  revealjs:
+    footer: "[jadeyryan.quarto.pub/fs-rladies-sl/](https://jadeyryan.quarto.pub/fs-rladies-sl/)"
+    logo: "images/witchy-jr-cat-fs.png"
+    logo-alt: "Jadey Ryan's cat hex logo with a witch hat joined by an orange heart with the fs hex sticker."
+    width: 1600
+    height: 900
+    theme: slides.scss
+    highlight-style: a11y
+    transition: fade
+    incremental: true
+    slide-number: true
+revealjs-plugins:
+  - pointer
+---
+
+## Jadey Ryan
+
+::::::: columns
+::: {.column width="44%"}
+Data scientist at [WA Dept of Agriculture](https://agr.wa.gov/agscience)
+
+[The Coding Cats](https://thecodingcats.etsy.com/): cat & code themed merch
+
+{{< fa link size=xl >}} [jadeyryan.com](https://jadeyryan.com)
+
+{{< fa brands bluesky size=xl >}}
+[\@jadeynryan](https://bsky.app/profile/jadeynryan.bsky.social)
+
+{{< fa brands mastodon size=xl >}}
+[\@jadeynryan](https://fosstodon.org/@jadeynryan)
+
+{{< fa brands linkedin size=xl >}}
+[linkedin.com/in/jadey-ryan](https://www.linkedin.com/in/jadey-ryan)
+
+{{< fa brands github size=xl >}} [jadeynryan](https://github.com/jadeynryan/)
+
+{{< fa brands etsy size=xl >}}
+[thecodingcats.etsy.com](https://thecodingcats.etsy.com/)
+
+![](images/mts.webp){fig-alt="Three snowshoe siamese cats in loaf mode. From left to right: Tai, Mai, and Skye"
+style="border-radius:1em;margin-top:auto"}
+:::
+
+::: {.column width="28%"}
+![](images/bulk-density.jpg){fig-alt="Jadey collecting a bulk density soil sample in a field of wheat stubble."
+style="border-radius:1em;margin-top:auto"}
+:::
+
+:::: {.column width="28%"}
+::: {layout-nrow="2"}
+![](images/soil-sampling.jpg){style="border-radius:1em;margin-top:auto"
+fig-alt="Jadey standing in a field of wheat stubble holding a 3 foot long soil sampling probe over her shoulder."}
+
+![](images/rangeland.jpg){fig-alt="Jadey standing in a grazed wildflower meadow with two colleagues collecting soil samples."
+style="border-radius:1em;margin-top:auto"}
+:::
+
+{{< fa camera title="Photo credit" >}} [@leslie.mmichel](https://twitter.com/leslie_mmichel)
+::::
+:::::::
+
+## Context setting
+
+::::: columns
+::: {.column width="50%"}
+![](images/documents-xkcd.png){height="20em"
+fig-alt="xkcdc omic of person standing behind another person looking at their documents folder on their computer saying 'Oh my god.'. The documents folder has hundreds of untitled documents."}
+:::
+
+::: {.column width="50%"}
+![](images/final-phd-comics.gif){fig-alt="PhD comic with panels showing the back and forth of a person revising a document with their adviser contually marking up each draft, while each draft is suffixed with final, revision, comments, and corrections."}
+:::
+:::::
+
+## What's wrong with this folder?
+
+```{r}
+source("demo/generate-spooky-folder.R")
+```
+
+## What's wrong with this folder? {background-color="black" background-image="https://images.unsplash.com/photo-1730033737735-44c75ffc665a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1169" background-opacity="0.4"}
+
+::: {style="font-size:1.8em"}
+-   Inconsistent capitalization
+-   Inconsistent use of delimiters (e.g., spaces, hyphens, underscores)
+-   File extensions don't match their subfolder
+-   Difficult to know which is *actually* the final version
+:::
+
+## Woes of inconsistent, poorly named files {background-color="black" background-image="https://images.unsplash.com/photo-1472496175377-b5d7625d4ba9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2080" background-opacity="0.4"}
+
+::: {style="font-size:1.8em"}
+-   Hard to find what you need when you need it
+-   Can break scripts and analysis pipelines
+-   Nightmare for collaborators and your future self
+-   Errors from using outdated versions
+-   Wastes time and energy
+:::
+
+## Meet {fs}
+
+:::::: columns
+:::: {.column width="80%"}
+::: {style="font-size:1.8em"}
+-   File system operations (e.g., create, rename, move, delete)
+-   Works on multiple operating systems
+-   Inspired by Rust's [fs module](https://doc.rust-lang.org/std/fs/index.html)
+-   [{fs} pkgdown site](https://fs.r-lib.org/)
+:::
+::::
+
+::: {.column width="20%"}
+![](https://fs.r-lib.org/logo.png){fig-alt="fs R package logo"}
+:::
+::::::
+
+# The basics {.section}
+
+## {fs} functions {background-color="black" background-image="https://images.unsplash.com/photo-1667168335262-7c273e602e0f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1204" background-opacity="0.3"}
+
+::: {style="font-size:1.8em"}
+-   Consistent syntax with four main categories
+    1.  `path_` for manipulating and constructing paths
+    2.  `file_` for files
+    3.  `dir_` for directories
+    4.  `link_` for links
+-   [{fs} function reference](https://fs.r-lib.org/reference/index.html)
+:::
+
+::: notes
+-   Directories are like file cabinets that hold folders and files.
+-   Links are references to other files or directories.
+-   Directories and links are special kinds of files, so `file_` functions will
+    generally work with them.
+:::
+
+## {fs} vs base R
+
+| {fs} | Base R |
+|----------------------------------------|----------------------------------------|
+| Vectorized (accept multiple paths as input) | Inconsistently vectorized |
+| Predictable return values that convey a path | Sometimes are logical and sometimes have error codes |
+| Consistent verb function names (`file_exist()` and `file_show()`) | Different naming conventions (e.g., `file.exist()` and `browseURL()`) |
+| Throws an error if an operation fails | Sometimes will only generate a warning and OS dependent error code |
+
+<br>
+
+. . .
+
+{fs} is more consistent and intuitive.
+
+. . .
+
+For more details, see [*Comparison of fs functions, base R, and shell commands*
+article](https://fs.r-lib.org/articles/function-comparisons.html).
+
+## Get started
+
+```{r}
+# install.packages("fs")
+library("fs")
+dir_tree(recurse = 2)
+```
+
+## Constructing file paths
+
+::: nonincremental
+
+- Straight-forward concatenation  with the right separator to work across operating systems!
+    - Windows: C:\\Users\\username\\Documents\\file.txt
+    - macOS: /Users/username/Documents/file.txt
+    
+:::
+
+. . .
+
+**Construct a path with the right separator**
+
+```{r}
+path <- path("halloween", "images", "spooky-cat", ext = "png")
+path
+```
+
+. . .
+
+**Special `fs_path` class**
+
+```{r}
+class(path)
+```
+
+. . .
+
+**Constructed path is relative to working directory**
+
+```{r}
+path_abs(path)
+```
+
+## Check for existence
+
+**Check if spooky-cat.png exists**
+
+```{r}
+file_exists(path)
+```
+
+<br>
+
+. . .
+
+**Create a path to an existing image**
+
+```{r}
+real_path <- path("images", "mts.webp")
+file_exists(real_path)
+```
+
+<br>
+
+. . .
+
+**Open the image**
+
+```{r}
+#| eval: false
+file_show(real_path)
+```
+
+## Create, move, copy, delete
+
+| Action  | Function        | Use Case                      |
+|---------|-----------------|-------------------------------|
+| Create* | `file_create()` | Create a new file             |
+| Copy*   | `file_copy()`   | Copy a file                   |
+| Move    | `file_move()`   | Move or rename a file         |
+| Delete* | `file_delete()` | Delete a file                 |
+
+*These also work with `dir_` and `link_` prefixes
+
+## Create
+
+**Create root directory**
+
+```{r}
+#| echo: false
+root <- path("demo", "scary-analysis")
+if (dir_exists(root)) {
+  dir_delete(root)
+}
+```
+
+```{r}
+root <- path("demo", "scary-analysis")
+dir_create("demo", "scary-analysis")
+```
+
+<br>
+
+. . . 
+
+**Set up sub-directories**
+
+```{r}
+subdirs <- c("R", "data/raw", "data/processed", "output", "reports", "images")
+dir_create(root, subdirs)
+```
+
+<br>
+
+. . . 
+
+**Create files**
+
+```{r}
+scripts <- path(root,
+                "R",
+                c("01-load-data.R", "02-wrangle-data.R", "03-model.R", "04-visualization.R"))
+
+file_create(scripts)
+```
+
+
+## Create results
+
+```{r}
+dir_tree("demo/scary-analysis/")
+```
+
+## Copy
+
+```{r}
+#| echo: false
+other_root <- path("demo", "other-scary-analysis")
+if (dir_exists(other_root)) {
+  dir_delete(other_root)
+}
+```
+
+
+```{r}
+dir_copy(path = "demo/scary-analysis", 
+         new_path = "demo/other-scary-analysis")
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+dir_tree("demo/scary-analysis")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+dir_tree("demo/other-scary-analysis")
+```
+:::
+::::
+
+## Copy safely
+
+```{r}
+#| error: true
+file_copy("demo/scary-analysis/R/01-load-data.R",
+          "demo/other-scary-analysis/R/01-load-data.R")
+```
+
+## Move
+
+**Create a new folder to move scripts into**
+
+```{r}
+dir_create("demo/scary-analysis/src")
+```
+
+<br>
+
+. . .
+
+**List all scripts in R folder**
+
+```{r}
+scripts <- dir_ls("demo/scary-analysis/R")
+```
+
+<br>
+
+. . .
+
+**Move the scripts into the new src folder**
+
+```{r}
+file_move(path = scripts, new_path = "demo/scary-analysis/src")
+```
+
+## Move results
+
+```{r}
+dir_tree("demo/scary-analysis")
+```
+
+## Rename with move
+
+```{r}
+file_move(path = "demo/other-scary-analysis/R",
+          new_path = "demo/other-scary-analysis/src")
+
+dir_tree("demo/other-scary-analysis")
+```
+
+## Delete
+
+```{r}
+dir_delete("demo/scary-analysis/R")
+dir_tree("demo/scary-analysis")
+```
+
+# Clean up a messy folder {.section}
+
+## Revisit our spooky folder
+
+```{r}
+dir_tree("demo/spooky-folder/")
+```
+
+## Naming conventions
+
+![Artwork by [Allison Horst](https://allisonhorst.com/)](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/dbb99049-2916-4bc8-824f-1816f5c4f06d_rw_1920.png?h=f0b45a30ba31ad414562d1085cd6c172){fig-alt='Cartoon representations of common cases in coding. A snake screams "SCREAMING_SNAKE_CASE" into the face of a camel (wearing ear muffs) with "camelCase" written along its back. Vegetables on a skewer spell out "kebab-case" (words on a skewer). A mellow, happy looking snake has text "snake_case" along it.'}
+
+## Meet {janitor} 
+
+![Artwork by [Allison Horst](https://allisonhorst.com/)](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/79a12c01-0cc1-4643-b1e7-8ce8cafc947b_rw_1920.png?h=a3760f3882e735d7065627fc060714ce){fig-alt='Title text: “janitor::clean_names(): convert all column names to *_case!” Below, a cartoon beaver putting shapes with long, messy column names (pulled from a bin labeled “MESS” and “not so awesome column names”) into a contraption that converts them to lower snake case. The output has stylized text reading “Way more deal-withable column names.” Learn more about clean_names and other *awesome* data cleaning tools in janitor.'}
+
+## {fs} meets {janitor}
+
+```{r}
+files_old <- dir_ls("demo/spooky-folder/", recurse = TRUE)
+files_new <- janitor::make_clean_names(files_old, case = "snake")
+```
+
+::: callout-warning
+You could just use {stringr} for cleaning, but {janitor} is more comprehensive. See the [`make_clean_names()` docs](https://sfirke.github.io/janitor/reference/make_clean_names.html).
+
+Arguments that might come in handy: `case`, `replace`, `parsing_option`, `abbreviations`, `sep_out`.
+:::
+
+## Always check files before renaming!
+
+Uh oh -- the directory separators and extensions were lost!
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+files_old
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+files_new
+```
+:::
+::::
+
+
+## Split, clean, and reconstruct
+
+**Split directory, name, and extension**
+
+```{r}
+paths <- dir_ls("demo/spooky-folder/", recurse = TRUE)
+parts <- path_split(paths)
+parts[1:3]
+```
+
+. . .
+
+**Clean with {janitor}**
+
+```{r}
+parts_clean <- purrr::map(parts, \(part) janitor::make_clean_names(part, case = "snake"))
+```
+
+. . .
+
+**Reconstruct**
+
+```{r}
+paths_clean <- path_join(parts_clean)
+```
+
+
+## Always check files before renaming!
+
+Uh oh -- the directory separators are maintained, but the extensions are still lost!
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+paths
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+paths_clean
+```
+:::
+::::
+
+## {fs} meets {stringr}
+
+```{r}
+paths_almost_clean <- paths_clean
+
+# Get extensions
+exts <- path_ext(paths) |> 
+  # Remove blanks
+  stringr::str_subset("\\S") |> 
+  # Remove duplicates
+  stringr::str_unique() |> 
+  # Make lowercase
+  stringr::str_to_lower()
+
+# Make dynamic regex pattern including extensions
+pattern <- paste0("_(?=(", paste(exts, collapse = "|"), ")$)")
+
+# Replace underscore before ext with period
+paths_clean <- stringr::str_replace(paths_almost_clean, pattern, ".") |> 
+  # Make fs_path again
+  path()
+```
+
+## Always check files before renaming!
+
+Yay! Let's just fix the R folder and extensions.
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+paths_almost_clean
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+paths_clean
+```
+:::
+::::
+
+## Make R uppercase again
+
+```{r}
+paths_clean <- paths_clean |> 
+  # Capitalize R folder name
+  stringr::str_replace("/r(?=/|$)", "/R") |> 
+  # Capitalize R extension
+  stringr::str_replace("\\.r", ".R")
+
+# Show the updated files containing R
+paths_clean |> 
+  stringr::str_subset("R")
+```
+
+## Complete the renaming
+
+But wait... our new folders don't exist yet!
+
+```{r}
+#| error: true
+file_move(path = paths, new_path = paths_clean)
+```
+
+<br>
+
+. . .
+
+::: callout-warning
+{fs} gotcha! `file_move()` and `file_copy()` don't automatically create parent folders!
+:::
+
+## Create parent folders first
+
+**Get the parent folders**
+
+```{r}
+parents <- unique(path_dir(paths_clean))
+parents
+```
+
+. . .
+
+**Create the parent folders**
+
+```{r}
+dir_create(parents)
+```
+
+## Complete the renaming
+
+**Filter out folders**
+
+```{r}
+paths <- subset(paths, !is_dir(paths))
+paths_clean <- subset(paths_clean, !is_dir(paths_clean))
+```
+
+. . .
+
+**Rename files with `file_move()`**
+
+```{r}
+file_move(paths, paths_clean)
+
+# Optionally, delete the old spooky-folder
+# dir_delete("demo/spooky-folder")
+```
+
+## See our pretty, cleaned folder
+
+```{r}
+dir_tree("demo/spooky_folder")
+```
+
+## Wait... we're not done yet!
+
+We have nice, consistent names... but the organization is still very wrong!
+
+**Use globs to get files based on extension**
+
+```{r}
+data <- dir_ls("demo/spooky_folder", recurse = TRUE, glob = "*.csv|*.xlsx")
+images <- dir_ls("demo/spooky_folder", recurse = TRUE, glob = "*.png")
+misc_files <- dir_ls("demo/spooky_folder", recurse = TRUE, glob = "*.txt")
+r <- dir_ls("demo/spooky_folder", recurse = TRUE, glob = "*.R")
+reports <- dir_ls("demo/spooky_folder", recurse = TRUE, glob = "*.doc|*.docx|*.qmd")
+```
+
+. . .
+
+**Move files into appropriate folders**
+
+```{r}
+file_move(data, "demo/spooky_folder/data")
+file_move(images, "demo/spooky_folder/images")
+file_move(misc_files, "demo/spooky_folder/misc_files")
+file_move(r, "demo/spooky_folder/R")
+file_move(reports, "demo/spooky_folder/reports")
+```
+
+## 
+
+:::: {.columns}
+::: {.column width="50%"}
+
+**What we started with**
+
+```{r}
+source("demo/generate-spooky-folder.R")
+```
+:::
+
+::: {.column width="50%"}
+
+**Our cleaned folder**
+
+```{r}
+dir_tree("demo/spooky_folder")
+```
+:::
+::::
+
+## Cleaning steps
+
+1. Review folder with `dir_tree()` to inspect structure and naming inconsistencies
+2. Plan new conventions (e.g., snake_case)
+3. Generate new names with {janitor} and/or {stringr}
+4. ⚠️**Review first before renaming!**⚠️
+5. Create new parent folders with `dir_create()`
+6. Filter out folders from old and new path vectors
+7. Move files with `file_move()`
+8. Review again with `dir_tree()`
+9. Final manual edits (e.g., "untitled_10_31.R")
+
+# Use functions to repeat this process {.section}
+
+## Clean paths function
+
+```{r}
+clean_paths <- function(folder, recurse = TRUE) {
+  # Split paths into parts
+  paths <- dir_ls(folder, recurse = recurse)
+  parts <- path_split(paths)
+
+  # Clean to snake_case
+  parts_clean <- purrr::map(
+    parts,
+    \(part) janitor::make_clean_names(part, case = "snake")
+  )
+
+  # Reconstruct paths
+  paths_clean <- path_join(parts_clean)
+
+  # Get extensions
+  exts <- path_ext(paths) |>
+    # Remove blanks
+    stringr::str_subset("\\S") |>
+    # Remove duplicates
+    stringr::str_unique() |>
+    # Make lowercase
+    stringr::str_to_lower()
+
+  # Make dynamic regex pattern including extensions
+  pattern <- paste0("_(?=(", paste(exts, collapse = "|"), ")$)")
+
+  # Replace underscore before ext with period and make R uppercase
+  paths_clean <- paths_clean |> 
+    stringr::str_replace(pattern, ".") |>
+    # Capitalize R folder name
+    stringr::str_replace("/r(?=/|$)", "/R") |>
+    # Capitalize R extension
+    stringr::str_replace("\\.r", ".R") |>
+    # Make fs_path again
+    path()
+
+  return(paths_clean)
+}
+```
+
+## `clean_paths()` results
+
+```{r}
+# Start fresh
+source("demo/generate-spooky-folder.R")
+paths <- dir_ls("demo/spooky-folder", recurse = TRUE)
+
+# Run function
+paths_clean <- clean_paths("demo/spooky-folder")
+```
+
+## Rename files function
+
+```{r}
+rename_files <- function(old_paths, new_paths) {
+  # Get parent folders
+  parents <- unique(path_dir(new_paths))
+  
+  # Create parent folders
+  dir_create(parents)
+  
+  # Filter out folders from files
+  old_paths <- subset(old_paths, !is_dir(old_paths))
+  new_paths <- subset(new_paths, !is_dir(new_paths))
+
+    # Rename files
+  file_move(old_paths, new_paths)
+  
+  # See results
+  dir_tree(path_common(new_paths))
+}
+```
+
+## `rename_files()` results
+
+```{r}
+rename_files(paths, paths_clean)
+```
+
+## Organize files function
+
+```{r}
+organize_files <- function(folder) {
+  # List subdirectories and extensions
+  data <- dir_ls(folder, recurse = TRUE, glob = "*.csv|*.xlsx")
+  images <- dir_ls(folder, recurse = TRUE, glob = "*.png")
+  misc_files <- dir_ls(folder, recurse = TRUE, glob = "*.txt")
+  r <- dir_ls(folder, recurse = TRUE, glob = "*.R")
+  reports <- dir_ls(folder, recurse = TRUE, glob = "*.doc|*.docx|*.qmd")
+
+  # Move files
+  file_move(data, path(stringr::str_glue("{folder}/data")))
+  file_move(images, path(stringr::str_glue("{folder}/images")))
+  file_move(misc_files, path(stringr::str_glue("{folder}/misc_files")))
+  file_move(r, path(stringr::str_glue("{folder}/R")))
+  file_move(reports, path(stringr::str_glue("{folder}/reports")))
+
+  # See results
+  dir_tree(folder)
+}
+```
+
+## `organize_files()` results
+
+```{r}
+organize_files("demo/spooky_folder")
+```
+
+## Full cleaning function workflow
+
+```{r}
+#| eval: false
+# Start fresh
+source("demo/generate-spooky-folder.R")
+paths <- dir_ls("demo/spooky-folder", recurse = TRUE)
+
+# Run function
+paths_clean <- clean_paths("demo/spooky-folder")
+paths_clean
+
+# Review paths_clean before running the next functions!
+rename_files(paths, paths_clean)
+organize_files("demo/spooky_folder")
+```
+
+# Query folder and file information {.section}
+
+## Resources {background-color="black" background-image="https://images.unsplash.com/photo-1570527976677-a6d99d170d5d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" background-opacity="0.3"}
+
+::: nonincremental 
+::: {style="font-size:1.4em"}
+-   Guest blog post & accompanying video tutorial for R for the Rest of Us [*Automate file management in R with the {fs} package*](https://rfortherestofus.com/2025/01/fs-file-management)
+-   Danielle Navarro's [*For fs* blog post](https://blog.djnavarro.net/posts/2024-10-06_fs/)
+-   Jenny Bryan's [*How to Name Files Like a
+    Normie* slides](https://github.com/jennybc/how-to-name-files)
+:::
+:::
+
+## Thank you!
+
+::::: columns
+::: {.column width="65%"}
+🏡 **Home for slides**:
+
+[jadeyryan.quarto.pub/fs-rladies-sl/](https://jadeyryan.quarto.pub/fs-rladies-sl/)
+
+👩🏻‍💻 **Source code**:
+
+[github.com/jadeynryan/fs-rladies-sl](https://github.com/jadeynryan/fs-rladies-sl)
+
+🎥 **Recordings from previous workshops & talks**:\
+[links in GitHub
+repo](https://github.com/jadeynryan/parameterized-quarto-workshop?tab=readme-ov-file#workshops)
+or [my YouTube
+playlist](https://youtube.com/playlist?list=PLzjGoNexcyYaDUVCg4MQDtMXLl2F5HE3B&si=-y0jQfCYyRAQjI1B)
+
+![](images/mts.jpg){width="600"
+fig-alt="From left to right, Mai, Tai, and Skye. Three snowshoe cats cuddling in their warming beds."
+style="border-radius:1em"}
+:::
+
+::: {.column width="35%"}
+**Let's connect!**
+
+{{< fa link size=xl >}} [jadeyryan.com](https://jadeyryan.com)
+
+{{< fa brands bluesky size=xl >}}
+[\@jadeynryan](https://bsky.app/profile/jadeynryan.bsky.social)
+
+{{< fa brands mastodon size=xl >}}
+[\@jadeynryan](https://fosstodon.org/@jadeynryan)
+
+{{< fa brands linkedin size=xl >}}
+[linkedin.com/in/jadey-ryan](https://www.linkedin.com/in/jadey-ryan)
+
+{{< fa brands github size=xl >}} [jadeynryan](https://github.com/jadeynryan/)
+
+{{< fa brands etsy size=xl >}}
+[thecodingcats.etsy.com](https://thecodingcats.etsy.com/)
+:::
+:::::

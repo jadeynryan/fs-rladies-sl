@@ -1,0 +1,4 @@
+- source: slides.qmd
+  quarto-pub:
+    - id: 91f8075b-e0a3-45c0-9778-b642140c20e0
+      url: https://jadeyryan.quarto.pub/fs-rladies-sl
