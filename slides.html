@@ -249,10 +249,25 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <p><img data-src="images/final-phd-comics.gif" alt="PhD comic with panels showing the back and forth of a person revising a document with their adviser contually marking up each draft, while each draft is suffixed with final, revision, comments, and corrections."></p>
 </div></div>
 </section>
+<section id="want-to-follow-along" class="slide level2">
+<h2>Want to follow along?</h2>
+<p>Download these two R scripts from this workshop’s GitHub repo</p>
+<p><a href="https://github.com/jadeynryan/fs-rladies-sl/tree/main" class="uri">https://github.com/jadeynryan/fs-rladies-sl/tree/main</a></p>
+<p><br></p>
+<p><a href="https://github.com/jadeynryan/fs-rladies-sl/blob/main/demo/generate-spooky-folder.R">demo/generate-spooky-folder.R</a></p>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>quarto<span class="sc">::</span><span class="fu">qmd_to_r_script</span>(<span class="st">"slides.qmd"</span>, <span class="at">script =</span> <span class="st">"demo/code-from-slides.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="https://github.com/jadeynryan/fs-rladies-sl/blob/main/demo/code-from-slides.R">demo/code-from-slides.R</a></p>
+<p><br></p>
+<p>Or, you can copy code chunks from these slides into an R script:<br>
+<a href="https://jadeyryan.quarto.pub/fs-rladies-sl/" class="uri">https://jadeyryan.quarto.pub/fs-rladies-sl/</a></p>
+</section>
 <section id="whats-wrong-with-this-folder" class="slide level2">
 <h2>What’s wrong with this folder?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">source</span>(<span class="st">"demo/generate-spooky-folder.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">source</span>(<span class="st">"demo/generate-spooky-folder.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky-folder
 ├── Data
@@ -266,7 +281,6 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 │   └── witchCauldron.png
 ├── Misc Files
 │   └── BlackCats.png
-├── misc-files
 ├── R
 │   ├── ghost data (final) v2.CSV
 │   ├── haunted_house.xlsx
@@ -287,6 +301,9 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <li class="fragment">Difficult to know which is <em>actually</em> the final version</li>
 </ul>
 </div>
+<div class="footer">
+<p>Photo by Alpha Perspective on Unsplash</p>
+</div>
 </section>
 <section id="woes-of-inconsistent-poorly-named-files" class="slide level2" data-background-color="black" data-background-image="https://images.unsplash.com/photo-1472496175377-b5d7625d4ba9?ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;q=80&amp;w=2080" data-background-opacity="0.4">
 <h2>Woes of inconsistent, poorly named files</h2>
@@ -298,6 +315,9 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <li class="fragment">Errors from using outdated versions</li>
 <li class="fragment">Wastes time and energy</li>
 </ul>
+</div>
+<div class="footer">
+<p>Photo by Sašo Tušar on Unsplash</p>
 </div>
 </section>
 <section id="meet-fs" class="slide level2">
@@ -334,6 +354,9 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 </ol></li>
 <li class="fragment"><a href="https://fs.r-lib.org/reference/index.html">{fs} function reference</a></li>
 </ul>
+</div>
+<div class="footer">
+<p>Photo by Reba Spike on Unsplash</p>
 </div>
 <aside class="notes">
 <ul>
@@ -396,38 +419,20 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <section id="get-started" class="slide level2">
 <h2>Get started</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># install.packages("fs")</span></span>
-<span id="cb3-2"><a href=""></a><span class="fu">library</span>(<span class="st">"fs"</span>)</span>
-<span id="cb3-3"><a href=""></a><span class="fu">dir_tree</span>(<span class="at">recurse =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">library</span>(<span class="st">"fs"</span>)</span>
+<span id="cb4-2"><a href=""></a><span class="co"># recurse = how many levels of subdirectories to compute on. recurse = TRUE means all of them.</span></span>
+<span id="cb4-3"><a href=""></a><span class="fu">dir_tree</span>(<span class="at">recurse =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.
 ├── demo
+│   ├── code-from-slides.R
 │   ├── generate-spooky-folder.R
-│   ├── other-scary-analysis
-│   │   ├── data
-│   │   ├── images
-│   │   ├── output
-│   │   ├── reports
-│   │   └── src
-│   ├── scary-analysis
-│   │   ├── data
-│   │   ├── images
-│   │   ├── output
-│   │   ├── reports
-│   │   └── src
-│   ├── spooky-folder
-│   │   ├── Data
-│   │   ├── images
-│   │   ├── Misc Files
-│   │   ├── misc-files
-│   │   ├── R
-│   │   └── REPORTS
-│   └── spooky_folder
-│       ├── data
+│   └── spooky-folder
+│       ├── Data
 │       ├── images
-│       ├── misc_files
+│       ├── Misc Files
 │       ├── R
-│       └── reports
+│       └── REPORTS
 ├── fs-rladies-sl.Rproj
 ├── images
 │   ├── bulk-density.jpg
@@ -471,8 +476,8 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <div class="fragment">
 <p><strong>Construct a path with the right separator</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>path <span class="ot">&lt;-</span> <span class="fu">path</span>(<span class="st">"halloween"</span>, <span class="st">"images"</span>, <span class="st">"spooky-cat"</span>, <span class="at">ext =</span> <span class="st">"png"</span>)</span>
-<span id="cb5-2"><a href=""></a>path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>path <span class="ot">&lt;-</span> <span class="fu">path</span>(<span class="st">"halloween"</span>, <span class="st">"images"</span>, <span class="st">"spooky-cat"</span>, <span class="at">ext =</span> <span class="st">"png"</span>)</span>
+<span id="cb6-2"><a href=""></a>path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>halloween/images/spooky-cat.png</code></pre>
 </div>
@@ -481,7 +486,7 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <div class="fragment">
 <p><strong>Special <code>fs_path</code> class</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">class</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">class</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "fs_path"   "character"</code></pre>
 </div>
@@ -490,7 +495,7 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <div class="fragment">
 <p><strong>Constructed path is relative to working directory</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">path_abs</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">path_abs</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>C:/Users/jryan/Documents/R/projects/fs-rladies-sl/halloween/images/spooky-cat.png</code></pre>
 </div>
@@ -499,9 +504,9 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 </section>
 <section id="check-for-existence" class="slide level2">
 <h2>Check for existence</h2>
-<p><strong>Check if spooky-cat.png exists</strong></p>
+<p><strong>Check if spooky-cat.png exists in the halloween folder</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">file_exists</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">file_exists</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>halloween/images/spooky-cat.png 
                           FALSE </code></pre>
@@ -511,8 +516,8 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <div class="fragment">
 <p><strong>Create a path to an existing image</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>real_path <span class="ot">&lt;-</span> <span class="fu">path</span>(<span class="st">"images"</span>, <span class="st">"mts.webp"</span>)</span>
-<span id="cb13-2"><a href=""></a><span class="fu">file_exists</span>(real_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>real_path <span class="ot">&lt;-</span> <span class="fu">path</span>(<span class="st">"images"</span>, <span class="st">"mts.webp"</span>)</span>
+<span id="cb14-2"><a href=""></a><span class="fu">file_exists</span>(real_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>images/mts.webp 
            TRUE </code></pre>
@@ -523,7 +528,7 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <div class="fragment">
 <p><strong>Open the image</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">file_show</span>(real_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">file_show</span>(real_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -566,33 +571,46 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <h2>Create</h2>
 <p><strong>Create root directory</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>root <span class="ot">&lt;-</span> <span class="fu">path</span>(<span class="st">"demo"</span>, <span class="st">"scary-analysis"</span>)</span>
-<span id="cb16-2"><a href=""></a><span class="fu">dir_create</span>(<span class="st">"demo"</span>, <span class="st">"scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>root <span class="ot">&lt;-</span> <span class="fu">path</span>(<span class="st">"demo"</span>, <span class="st">"scary-analysis"</span>)</span>
+<span id="cb17-2"><a href=""></a><span class="fu">dir_create</span>(root)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><br></p>
 <div class="fragment">
 <p><strong>Set up sub-directories</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>subdirs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"data/raw"</span>, <span class="st">"data/processed"</span>, <span class="st">"output"</span>, <span class="st">"reports"</span>, <span class="st">"images"</span>)</span>
-<span id="cb17-2"><a href=""></a><span class="fu">dir_create</span>(root, subdirs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>subdirs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"data/raw"</span>, <span class="st">"data/processed"</span>, <span class="st">"output"</span>, <span class="st">"reports"</span>, <span class="st">"images"</span>)</span>
+<span id="cb18-2"><a href=""></a><span class="fu">dir_create</span>(root, subdirs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><br></p>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Must pass vector of names to <code>dir_create</code>. Otherwise, <code>dir_create(root, "R", "data/raw", "data/processed", "output", "reports", "images")</code> will result in this folder path: <code>scary-analysis/R/data/raw/data/processed/output/reports/images/</code>.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="fragment">
 <p><strong>Create files</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>scripts <span class="ot">&lt;-</span> <span class="fu">path</span>(root,</span>
-<span id="cb18-2"><a href=""></a>                <span class="st">"R"</span>,</span>
-<span id="cb18-3"><a href=""></a>                <span class="fu">c</span>(<span class="st">"01-load-data.R"</span>, <span class="st">"02-wrangle-data.R"</span>, <span class="st">"03-model.R"</span>, <span class="st">"04-visualization.R"</span>))</span>
-<span id="cb18-4"><a href=""></a></span>
-<span id="cb18-5"><a href=""></a><span class="fu">file_create</span>(scripts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>scripts <span class="ot">&lt;-</span> <span class="fu">path</span>(root,</span>
+<span id="cb19-2"><a href=""></a>                <span class="st">"R"</span>,</span>
+<span id="cb19-3"><a href=""></a>                <span class="fu">c</span>(<span class="st">"01-load-data.R"</span>, <span class="st">"02-wrangle-data.R"</span>, <span class="st">"03-model.R"</span>, <span class="st">"04-visualization.R"</span>))</span>
+<span id="cb19-4"><a href=""></a></span>
+<span id="cb19-5"><a href=""></a><span class="fu">file_create</span>(scripts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="create-results" class="slide level2">
 <h2>Create results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/scary-analysis/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/scary-analysis/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/scary-analysis/
 ├── data
@@ -612,13 +630,14 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <section id="copy" class="slide level2">
 <h2>Copy</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">dir_copy</span>(<span class="at">path =</span> <span class="st">"demo/scary-analysis"</span>, </span>
-<span id="cb21-2"><a href=""></a>         <span class="at">new_path =</span> <span class="st">"demo/other-scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">dir_copy</span>(<span class="at">path =</span> <span class="st">"demo/scary-analysis"</span>, </span>
+<span id="cb22-2"><a href=""></a>         <span class="at">new_path =</span> <span class="st">"demo/other-scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><strong>Files and directories exist in both locations with <code>dir_copy()</code></strong></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/scary-analysis
 ├── data
@@ -636,7 +655,7 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/other-scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/other-scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/other-scary-analysis
 ├── data
@@ -656,39 +675,50 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 </section>
 <section id="copy-safely" class="slide level2">
 <h2>Copy safely</h2>
+<p><strong>By default, <code>file_copy()</code> will fail if the file already exists.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">file_copy</span>(<span class="st">"demo/scary-analysis/R/01-load-data.R"</span>,</span>
-<span id="cb26-2"><a href=""></a>          <span class="st">"demo/other-scary-analysis/R/01-load-data.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">file_copy</span>(<span class="st">"demo/scary-analysis/R/01-load-data.R"</span>,</span>
+<span id="cb27-2"><a href=""></a>          <span class="st">"demo/other-scary-analysis/R/01-load-data.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: [EEXIST] Failed to copy 'demo/scary-analysis/R/01-load-data.R' to 'demo/other-scary-analysis/R/01-load-data.R': file already exists</code></pre>
+</div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p><strong>Unless, you use <code>overwrite = TRUE</code>.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">file_copy</span>(<span class="st">"demo/scary-analysis/R/01-load-data.R"</span>,</span>
+<span id="cb29-2"><a href=""></a>          <span class="st">"demo/other-scary-analysis/R/01-load-data.R"</span>,</span>
+<span id="cb29-3"><a href=""></a>          <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="move" class="slide level2">
 <h2>Move</h2>
-<p><strong>Create a new folder to move scripts into</strong></p>
+<p><strong>Create a new <code>src</code> folder to move scripts into</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">dir_create</span>(<span class="st">"demo/scary-analysis/src"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">dir_create</span>(<span class="st">"demo/scary-analysis/src"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <div class="fragment">
-<p><strong>List all scripts in R folder</strong></p>
+<p><strong>List all scripts in R folder with <code>dir_ls()</code></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>scripts <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/scary-analysis/R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>scripts <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/scary-analysis/R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </div>
 <div class="fragment">
 <p><strong>Move the scripts into the new src folder</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">file_move</span>(<span class="at">path =</span> scripts, <span class="at">new_path =</span> <span class="st">"demo/scary-analysis/src"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">file_move</span>(<span class="at">path =</span> scripts, <span class="at">new_path =</span> <span class="st">"demo/scary-analysis/src"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="move-results" class="slide level2">
 <h2>Move results</h2>
+<p><strong>R scripts are now only in the <code>src</code> folder after being moved from the <code>R</code> folder</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/scary-analysis
 ├── data
@@ -708,11 +738,12 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 </section>
 <section id="rename-with-move" class="slide level2">
 <h2>Rename with move</h2>
+<p><strong>Use <code>file_move()</code> to rename directories and files</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">file_move</span>(<span class="at">path =</span> <span class="st">"demo/other-scary-analysis/R"</span>,</span>
-<span id="cb33-2"><a href=""></a>          <span class="at">new_path =</span> <span class="st">"demo/other-scary-analysis/src"</span>)</span>
-<span id="cb33-3"><a href=""></a></span>
-<span id="cb33-4"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/other-scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">file_move</span>(<span class="at">path =</span> <span class="st">"demo/other-scary-analysis/R"</span>,</span>
+<span id="cb35-2"><a href=""></a>          <span class="at">new_path =</span> <span class="st">"demo/other-scary-analysis/src"</span>)</span>
+<span id="cb35-3"><a href=""></a></span>
+<span id="cb35-4"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/other-scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/other-scary-analysis
 ├── data
@@ -728,12 +759,26 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
     └── 04-visualization.R</code></pre>
 </div>
 </div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>If the goal is to rename a folder, don’t use <code>dir_create()</code> first like we did in the last example. Just use <code>file_move()</code> in one step.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="delete" class="slide level2">
 <h2>Delete</h2>
+<p><strong>Delete the empty R folder from the first move example with <code>dir_delete()</code></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">dir_delete</span>(<span class="st">"demo/scary-analysis/R"</span>)</span>
-<span id="cb35-2"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">dir_delete</span>(<span class="st">"demo/scary-analysis/R"</span>)</span>
+<span id="cb37-2"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/scary-analysis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/scary-analysis
 ├── data
@@ -758,7 +803,7 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <section id="revisit-our-spooky-folder" class="slide level2">
 <h2>Revisit our spooky folder</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/spooky-folder/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/spooky-folder/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky-folder/
 ├── Data
@@ -772,7 +817,6 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 │   └── witchCauldron.png
 ├── Misc Files
 │   └── BlackCats.png
-├── misc-files
 ├── R
 │   ├── ghost data (final) v2.CSV
 │   ├── haunted_house.xlsx
@@ -785,6 +829,7 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 </section>
 <section id="naming-conventions" class="slide level2">
 <h2>Naming conventions</h2>
+<p>What do you use for folders and files? Is this standardized within just your projects? Team? Organization?</p>
 
 <img data-src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/dbb99049-2916-4bc8-824f-1816f5c4f06d_rw_1920.png?h=f0b45a30ba31ad414562d1085cd6c172" alt="Cartoon representations of common cases in coding. A snake screams &quot;SCREAMING_SNAKE_CASE&quot; into the face of a camel (wearing ear muffs) with &quot;camelCase&quot; written along its back. Vegetables on a skewer spell out &quot;kebab-case&quot; (words on a skewer). A mellow, happy looking snake has text &quot;snake_case&quot; along it." class="r-stretch quarto-figure-center"><p class="caption">Artwork by <a href="https://allisonhorst.com/">Allison Horst</a></p></section>
 <section id="meet-janitor" class="slide level2">
@@ -794,19 +839,21 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <section id="fs-meets-janitor" class="slide level2">
 <h2>{fs} meets {janitor}</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>files_old <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky-folder/"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb39-2"><a href=""></a>files_new <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(files_old, <span class="at">case =</span> <span class="st">"snake"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>files_old <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky-folder/"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-2"><a href=""></a>files_new <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(files_old, <span class="at">case =</span> <span class="st">"snake"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Warning</strong></p>
+<p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>You could just use {stringr} for cleaning, but {janitor} is more comprehensive. See the <a href="https://sfirke.github.io/janitor/reference/make_clean_names.html"><code>make_clean_names()</code> docs</a>.</p>
+<p>You could just use {stringr} for cleaning, but {janitor} is more comprehensive so you don’t need to write as much regex.</p>
+<p>E.g., <code>myImportantFile</code> would be be cleaned to <code>my_important_file</code>.</p>
+<p>See the <a href="https://sfirke.github.io/janitor/reference/make_clean_names.html"><code>make_clean_names()</code> docs</a>.</p>
 <p>Arguments that might come in handy: <code>case</code>, <code>replace</code>, <code>parsing_option</code>, <code>abbreviations</code>, <code>sep_out</code>.</p>
 </div>
 </div>
@@ -818,7 +865,7 @@ Jadey Ryan // October 29, 2025<br>R-Ladies St.&nbsp;Louis
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>files_old</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>files_old</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky-folder/Data
 demo/spooky-folder/Data/ghost-viz.R
@@ -831,7 +878,6 @@ demo/spooky-folder/images
 demo/spooky-folder/images/witchCauldron.png
 demo/spooky-folder/Misc Files
 demo/spooky-folder/Misc Files/BlackCats.png
-demo/spooky-folder/misc-files
 demo/spooky-folder/R
 demo/spooky-folder/R/ghost data (final) v2.CSV
 demo/spooky-folder/R/haunted_house.xlsx
@@ -843,7 +889,7 @@ demo/spooky-folder/REPORTS/ghost data.csv</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>files_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a>files_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "demo_spooky_folder_data"                        
  [2] "demo_spooky_folder_data_ghost_viz_r"            
@@ -856,25 +902,24 @@ demo/spooky-folder/REPORTS/ghost data.csv</code></pre>
  [9] "demo_spooky_folder_images_witch_cauldron_png"   
 [10] "demo_spooky_folder_misc_files"                  
 [11] "demo_spooky_folder_misc_files_black_cats_png"   
-[12] "demo_spooky_folder_misc_files_2"                
-[13] "demo_spooky_folder_r"                           
-[14] "demo_spooky_folder_r_ghost_data_final_v2_csv"   
-[15] "demo_spooky_folder_r_haunted_house_xlsx"        
-[16] "demo_spooky_folder_r_untitled_10_31_r"          
-[17] "demo_spooky_folder_reports"                     
-[18] "demo_spooky_folder_reports_ghost_data_final_csv"
-[19] "demo_spooky_folder_reports_ghost_data_csv"      </code></pre>
+[12] "demo_spooky_folder_r"                           
+[13] "demo_spooky_folder_r_ghost_data_final_v2_csv"   
+[14] "demo_spooky_folder_r_haunted_house_xlsx"        
+[15] "demo_spooky_folder_r_untitled_10_31_r"          
+[16] "demo_spooky_folder_reports"                     
+[17] "demo_spooky_folder_reports_ghost_data_final_csv"
+[18] "demo_spooky_folder_reports_ghost_data_csv"      </code></pre>
 </div>
 </div>
 </div></div>
 </section>
 <section id="split-clean-and-reconstruct" class="slide level2">
 <h2>Split, clean, and reconstruct</h2>
-<p><strong>Split directory, name, and extension</strong></p>
+<p><strong>To avoid the separators being turned into underscores, let’s split the directory, name, and extension with <code>path_split()</code></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a>paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky-folder/"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb44-2"><a href=""></a>parts <span class="ot">&lt;-</span> <span class="fu">path_split</span>(paths)</span>
-<span id="cb44-3"><a href=""></a>parts[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky-folder/"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb46-2"><a href=""></a>parts <span class="ot">&lt;-</span> <span class="fu">path_split</span>(paths)</span>
+<span id="cb46-3"><a href=""></a>parts[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] "demo"          "spooky-folder" "Data"         
@@ -890,13 +935,13 @@ demo/spooky-folder/REPORTS/ghost data.csv</code></pre>
 <div class="fragment">
 <p><strong>Clean with {janitor}</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>parts_clean <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(parts, \(part) janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(part, <span class="at">case =</span> <span class="st">"snake"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>parts_clean <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(parts, \(part) janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(part, <span class="at">case =</span> <span class="st">"snake"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
 <p><strong>Reconstruct</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>paths_clean <span class="ot">&lt;-</span> <span class="fu">path_join</span>(parts_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a>paths_clean <span class="ot">&lt;-</span> <span class="fu">path_join</span>(parts_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -906,7 +951,7 @@ demo/spooky-folder/REPORTS/ghost data.csv</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>paths</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>paths</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky-folder/Data
 demo/spooky-folder/Data/ghost-viz.R
@@ -919,7 +964,6 @@ demo/spooky-folder/images
 demo/spooky-folder/images/witchCauldron.png
 demo/spooky-folder/Misc Files
 demo/spooky-folder/Misc Files/BlackCats.png
-demo/spooky-folder/misc-files
 demo/spooky-folder/R
 demo/spooky-folder/R/ghost data (final) v2.CSV
 demo/spooky-folder/R/haunted_house.xlsx
@@ -931,7 +975,7 @@ demo/spooky-folder/REPORTS/ghost data.csv</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>paths_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a>paths_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky_folder/data
 demo/spooky_folder/data/ghost_viz_r
@@ -944,7 +988,6 @@ demo/spooky_folder/images
 demo/spooky_folder/images/witch_cauldron_png
 demo/spooky_folder/misc_files
 demo/spooky_folder/misc_files/black_cats_png
-demo/spooky_folder/misc_files
 demo/spooky_folder/r
 demo/spooky_folder/r/ghost_data_final_v2_csv
 demo/spooky_folder/r/haunted_house_xlsx
@@ -958,34 +1001,35 @@ demo/spooky_folder/reports/ghost_data_csv</code></pre>
 </section>
 <section id="fs-meets-stringr" class="slide level2">
 <h2>{fs} meets {stringr}</h2>
+<p><strong>Use <code>path_ext()</code> to get the extensions and {stringr} to replace the underscore before the extension with a period</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a>paths_almost_clean <span class="ot">&lt;-</span> paths_clean</span>
-<span id="cb52-2"><a href=""></a></span>
-<span id="cb52-3"><a href=""></a><span class="co"># Get extensions</span></span>
-<span id="cb52-4"><a href=""></a>exts <span class="ot">&lt;-</span> <span class="fu">path_ext</span>(paths) <span class="sc">|&gt;</span> </span>
-<span id="cb52-5"><a href=""></a>  <span class="co"># Remove blanks</span></span>
-<span id="cb52-6"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_subset</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">S"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb52-7"><a href=""></a>  <span class="co"># Remove duplicates</span></span>
-<span id="cb52-8"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_unique</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb52-9"><a href=""></a>  <span class="co"># Make lowercase</span></span>
-<span id="cb52-10"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_to_lower</span>()</span>
-<span id="cb52-11"><a href=""></a></span>
-<span id="cb52-12"><a href=""></a><span class="co"># Make dynamic regex pattern including extensions</span></span>
-<span id="cb52-13"><a href=""></a>pattern <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"_(?=("</span>, <span class="fu">paste</span>(exts, <span class="at">collapse =</span> <span class="st">"|"</span>), <span class="st">")$)"</span>)</span>
-<span id="cb52-14"><a href=""></a></span>
-<span id="cb52-15"><a href=""></a><span class="co"># Replace underscore before ext with period</span></span>
-<span id="cb52-16"><a href=""></a>paths_clean <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(paths_almost_clean, pattern, <span class="st">"."</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb52-17"><a href=""></a>  <span class="co"># Make fs_path again</span></span>
-<span id="cb52-18"><a href=""></a>  <span class="fu">path</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a>paths_almost_clean <span class="ot">&lt;-</span> paths_clean</span>
+<span id="cb54-2"><a href=""></a></span>
+<span id="cb54-3"><a href=""></a><span class="co"># Get extensions</span></span>
+<span id="cb54-4"><a href=""></a>exts <span class="ot">&lt;-</span> <span class="fu">path_ext</span>(paths) <span class="sc">|&gt;</span> </span>
+<span id="cb54-5"><a href=""></a>  <span class="co"># Remove blanks</span></span>
+<span id="cb54-6"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_subset</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">S"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-7"><a href=""></a>  <span class="co"># Remove duplicates</span></span>
+<span id="cb54-8"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_unique</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb54-9"><a href=""></a>  <span class="co"># Make lowercase</span></span>
+<span id="cb54-10"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_to_lower</span>()</span>
+<span id="cb54-11"><a href=""></a></span>
+<span id="cb54-12"><a href=""></a><span class="co"># Make dynamic regex pattern including extensions</span></span>
+<span id="cb54-13"><a href=""></a>pattern <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"_(?=("</span>, <span class="fu">paste</span>(exts, <span class="at">collapse =</span> <span class="st">"|"</span>), <span class="st">")$)"</span>)</span>
+<span id="cb54-14"><a href=""></a></span>
+<span id="cb54-15"><a href=""></a><span class="co"># Replace underscore before ext with period</span></span>
+<span id="cb54-16"><a href=""></a>paths_clean <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(paths_almost_clean, pattern, <span class="st">"."</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-17"><a href=""></a>  <span class="co"># Make fs_path again</span></span>
+<span id="cb54-18"><a href=""></a>  <span class="fu">path</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="always-check-files-before-renaming-2" class="slide level2">
 <h2>Always check files before renaming!</h2>
-<p>Yay! Let’s just fix the R folder and extensions.</p>
+<p>Yay! Let’s just re-capitalize the R folder and .R extensions.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a>paths_almost_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a>paths_almost_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky_folder/data
 demo/spooky_folder/data/ghost_viz_r
@@ -998,7 +1042,6 @@ demo/spooky_folder/images
 demo/spooky_folder/images/witch_cauldron_png
 demo/spooky_folder/misc_files
 demo/spooky_folder/misc_files/black_cats_png
-demo/spooky_folder/misc_files
 demo/spooky_folder/r
 demo/spooky_folder/r/ghost_data_final_v2_csv
 demo/spooky_folder/r/haunted_house_xlsx
@@ -1010,7 +1053,7 @@ demo/spooky_folder/reports/ghost_data_csv</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a>paths_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a>paths_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky_folder/data
 demo/spooky_folder/data/ghost_viz.r
@@ -1023,7 +1066,6 @@ demo/spooky_folder/images
 demo/spooky_folder/images/witch_cauldron.png
 demo/spooky_folder/misc_files
 demo/spooky_folder/misc_files/black_cats.png
-demo/spooky_folder/misc_files
 demo/spooky_folder/r
 demo/spooky_folder/r/ghost_data_final_v2.csv
 demo/spooky_folder/r/haunted_house.xlsx
@@ -1038,15 +1080,15 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 <section id="make-r-uppercase-again" class="slide level2">
 <h2>Make R uppercase again</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a>paths_clean <span class="ot">&lt;-</span> paths_clean <span class="sc">|&gt;</span> </span>
-<span id="cb57-2"><a href=""></a>  <span class="co"># Capitalize R folder name</span></span>
-<span id="cb57-3"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"/r(?=/|$)"</span>, <span class="st">"/R"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb57-4"><a href=""></a>  <span class="co"># Capitalize R extension</span></span>
-<span id="cb57-5"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.r"</span>, <span class="st">".R"</span>)</span>
-<span id="cb57-6"><a href=""></a></span>
-<span id="cb57-7"><a href=""></a><span class="co"># Show the updated files containing R</span></span>
-<span id="cb57-8"><a href=""></a>paths_clean <span class="sc">|&gt;</span> </span>
-<span id="cb57-9"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_subset</span>(<span class="st">"R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a>paths_clean <span class="ot">&lt;-</span> paths_clean <span class="sc">|&gt;</span> </span>
+<span id="cb59-2"><a href=""></a>  <span class="co"># Capitalize R folder name</span></span>
+<span id="cb59-3"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"/r(?=/|$)"</span>, <span class="st">"/R"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb59-4"><a href=""></a>  <span class="co"># Capitalize R extension</span></span>
+<span id="cb59-5"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.r"</span>, <span class="st">".R"</span>)</span>
+<span id="cb59-6"><a href=""></a></span>
+<span id="cb59-7"><a href=""></a><span class="co"># Show the updated files containing R</span></span>
+<span id="cb59-8"><a href=""></a>paths_clean <span class="sc">|&gt;</span> </span>
+<span id="cb59-9"><a href=""></a>  stringr<span class="sc">::</span><span class="fu">str_subset</span>(<span class="st">"R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "demo/spooky_folder/data/ghost_viz.R"         
 [2] "demo/spooky_folder/R"                        
@@ -1060,13 +1102,12 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 <h2>Complete the renaming</h2>
 <p>But wait… our new folders don’t exist yet!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="fu">file_move</span>(<span class="at">path =</span> paths, <span class="at">new_path =</span> paths_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">file_move</span>(<span class="at">path =</span> paths, <span class="at">new_path =</span> paths_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error: Arguments must have consistent lengths, only values of length one are recycled.</code></pre>
+<pre><code>Error: [ENOENT] Failed to move 'demo/spooky-folder/Data' to 'demo/spooky_folder/data': no such file or directory</code></pre>
 </div>
 </div>
 <p><br></p>
-<div class="fragment">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1080,14 +1121,13 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section id="create-parent-folders-first" class="slide level2">
 <h2>Create parent folders first</h2>
-<p><strong>Get the parent folders</strong></p>
+<p><strong>Get the parent folders with <code>path_dir()</code></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a>parents <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">path_dir</span>(paths_clean))</span>
-<span id="cb61-2"><a href=""></a>parents</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a>parents <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">path_dir</span>(paths_clean))</span>
+<span id="cb63-2"><a href=""></a>parents</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "demo/spooky_folder"            "demo/spooky_folder/data"      
 [3] "demo/spooky_folder/images"     "demo/spooky_folder/misc_files"
@@ -1095,63 +1135,77 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 </div>
 </div>
 <div class="fragment">
-<p><strong>Create the parent folders</strong></p>
+<p><strong>Create the parent folders if they don’t already exist</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="fu">dir_create</span>(parents)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a>parents <span class="sc">|&gt;</span> </span>
+<span id="cb65-2"><a href=""></a>  purrr<span class="sc">::</span><span class="fu">map</span>(\(x) {</span>
+<span id="cb65-3"><a href=""></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir_exists</span>(x)) {</span>
+<span id="cb65-4"><a href=""></a>      <span class="fu">dir_create</span>(x)</span>
+<span id="cb65-5"><a href=""></a>    }</span>
+<span id="cb65-6"><a href=""></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+demo/spooky_folder
+
+[[2]]
+demo/spooky_folder/data
+
+[[3]]
+demo/spooky_folder/images
+
+[[4]]
+demo/spooky_folder/misc_files
+
+[[5]]
+demo/spooky_folder/R
+
+[[6]]
+demo/spooky_folder/reports</code></pre>
+</div>
 </div>
 </div>
 </section>
 <section id="complete-the-renaming-1" class="slide level2">
 <h2>Complete the renaming</h2>
-<p><strong>Filter out folders</strong></p>
+<p><strong>Filter out folders from current paths and new paths with <code>!is_dir()</code></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a>paths <span class="ot">&lt;-</span> <span class="fu">subset</span>(paths, <span class="sc">!</span><span class="fu">is_dir</span>(paths))</span>
-<span id="cb64-2"><a href=""></a>paths_clean <span class="ot">&lt;-</span> <span class="fu">subset</span>(paths_clean, <span class="sc">!</span><span class="fu">is_dir</span>(paths_clean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a>paths <span class="ot">&lt;-</span> <span class="fu">subset</span>(paths, <span class="sc">!</span><span class="fu">is_dir</span>(paths))</span>
+<span id="cb67-2"><a href=""></a>paths_clean <span class="ot">&lt;-</span> <span class="fu">subset</span>(paths_clean, <span class="sc">!</span><span class="fu">is_dir</span>(paths_clean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <p><strong>Rename files with <code>file_move()</code></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a><span class="fu">file_move</span>(paths, paths_clean)</span>
-<span id="cb65-2"><a href=""></a></span>
-<span id="cb65-3"><a href=""></a><span class="co"># Optionally, delete the old spooky-folder</span></span>
-<span id="cb65-4"><a href=""></a><span class="co"># dir_delete("demo/spooky-folder")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="fu">file_move</span>(paths, paths_clean)</span>
+<span id="cb68-2"><a href=""></a></span>
+<span id="cb68-3"><a href=""></a><span class="co"># Optionally, delete the old spooky-folder</span></span>
+<span id="cb68-4"><a href=""></a><span class="co"># dir_delete("demo/spooky-folder")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="see-our-pretty-cleaned-folder" class="slide level2">
 <h2>See our pretty, cleaned folder</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/spooky_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/spooky_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky_folder
 ├── data
-│   ├── ghost_data.csv
-│   ├── ghost_data_final.csv
-│   ├── ghost_data_final_v2.csv
 │   ├── ghost_viz.R
-│   ├── haunted_house.xlsx
 │   ├── pumpkin_stats.csv
 │   ├── skeleton_report.doc
 │   ├── skeleton_report.qmd
 │   ├── vampire_bats.txt
 │   └── witch_list.docx
 ├── images
-│   ├── black_cats.png
 │   └── witch_cauldron.png
 ├── misc_files
-│   ├── black_cats.png
-│   └── vampire_bats.txt
+│   └── black_cats.png
 ├── R
 │   ├── ghost_data_final_v2.csv
-│   ├── ghost_viz.R
 │   ├── haunted_house.xlsx
 │   └── untitled_10_31.R
 └── reports
     ├── ghost_data.csv
-    ├── ghost_data_final.csv
-    ├── skeleton_report.doc
-    ├── skeleton_report.qmd
-    └── witch_list.docx</code></pre>
+    └── ghost_data_final.csv</code></pre>
 </div>
 </div>
 </section>
@@ -1160,20 +1214,20 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 <p>We have nice, consistent names… but the organization is still very wrong!</p>
 <p><strong>Use globs to get files based on extension</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.csv|*.xlsx"</span>)</span>
-<span id="cb68-2"><a href=""></a>images <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.png"</span>)</span>
-<span id="cb68-3"><a href=""></a>misc_files <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.txt"</span>)</span>
-<span id="cb68-4"><a href=""></a>r <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.R"</span>)</span>
-<span id="cb68-5"><a href=""></a>reports <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.doc|*.docx|*.qmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.csv|*.xlsx"</span>)</span>
+<span id="cb71-2"><a href=""></a>images <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.png"</span>)</span>
+<span id="cb71-3"><a href=""></a>misc_files <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.txt"</span>)</span>
+<span id="cb71-4"><a href=""></a>r <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.R"</span>)</span>
+<span id="cb71-5"><a href=""></a>reports <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky_folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.doc|*.docx|*.qmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <p><strong>Move files into appropriate folders</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a><span class="fu">file_move</span>(data, <span class="st">"demo/spooky_folder/data"</span>)</span>
-<span id="cb69-2"><a href=""></a><span class="fu">file_move</span>(images, <span class="st">"demo/spooky_folder/images"</span>)</span>
-<span id="cb69-3"><a href=""></a><span class="fu">file_move</span>(misc_files, <span class="st">"demo/spooky_folder/misc_files"</span>)</span>
-<span id="cb69-4"><a href=""></a><span class="fu">file_move</span>(r, <span class="st">"demo/spooky_folder/R"</span>)</span>
-<span id="cb69-5"><a href=""></a><span class="fu">file_move</span>(reports, <span class="st">"demo/spooky_folder/reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a><span class="fu">file_move</span>(data, <span class="st">"demo/spooky_folder/data"</span>)</span>
+<span id="cb72-2"><a href=""></a><span class="fu">file_move</span>(images, <span class="st">"demo/spooky_folder/images"</span>)</span>
+<span id="cb72-3"><a href=""></a><span class="fu">file_move</span>(misc_files, <span class="st">"demo/spooky_folder/misc_files"</span>)</span>
+<span id="cb72-4"><a href=""></a><span class="fu">file_move</span>(r, <span class="st">"demo/spooky_folder/R"</span>)</span>
+<span id="cb72-5"><a href=""></a><span class="fu">file_move</span>(reports, <span class="st">"demo/spooky_folder/reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -1183,7 +1237,7 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 <div class="column" style="width:50%;">
 <p><strong>What we started with</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="fu">source</span>(<span class="st">"demo/generate-spooky-folder.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href=""></a><span class="fu">source</span>(<span class="st">"demo/generate-spooky-folder.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky-folder
 ├── Data
@@ -1197,7 +1251,6 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 │   └── witchCauldron.png
 ├── Misc Files
 │   └── BlackCats.png
-├── misc-files
 ├── R
 │   ├── ghost data (final) v2.CSV
 │   ├── haunted_house.xlsx
@@ -1210,7 +1263,7 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 </div><div class="column" style="width:50%;">
 <p><strong>Our cleaned folder</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/spooky_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="fu">dir_tree</span>(<span class="st">"demo/spooky_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky_folder
 ├── data
@@ -1240,122 +1293,142 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 <ol type="1">
 <li class="fragment">Review folder with <code>dir_tree()</code> to inspect structure and naming inconsistencies</li>
 <li class="fragment">Plan new conventions (e.g., snake_case)</li>
+<li class="fragment">Initial manual edits (e.g., untitled.R)</li>
 <li class="fragment">Generate new names with {janitor} and/or {stringr}</li>
 <li class="fragment">⚠️<strong>Review first before renaming!</strong>⚠️</li>
 <li class="fragment">Create new parent folders with <code>dir_create()</code></li>
 <li class="fragment">Filter out folders from old and new path vectors</li>
 <li class="fragment">Move files with <code>file_move()</code></li>
 <li class="fragment">Review again with <code>dir_tree()</code></li>
-<li class="fragment">Final manual edits (e.g., “untitled_10_31.R”)</li>
+<li class="fragment">Any final manual edits</li>
 </ol>
 </section></section>
 <section>
-<section id="use-functions-to-repeat-this-process" class="title-slide slide level1 section center">
-<h1>Use functions to repeat this process</h1>
+<section id="use-functions-to-repeat-this-process-for-multiple-folders" class="title-slide slide level1 section center">
+<h1>Use functions to repeat this process for multiple folders</h1>
 
 </section>
 <section id="clean-paths-function" class="slide level2">
 <h2>Clean paths function</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a>clean_paths <span class="ot">&lt;-</span> <span class="cf">function</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb74-2"><a href=""></a>  <span class="co"># Split paths into parts</span></span>
-<span id="cb74-3"><a href=""></a>  paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> recurse)</span>
-<span id="cb74-4"><a href=""></a>  parts <span class="ot">&lt;-</span> <span class="fu">path_split</span>(paths)</span>
-<span id="cb74-5"><a href=""></a></span>
-<span id="cb74-6"><a href=""></a>  <span class="co"># Clean to snake_case</span></span>
-<span id="cb74-7"><a href=""></a>  parts_clean <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(</span>
-<span id="cb74-8"><a href=""></a>    parts,</span>
-<span id="cb74-9"><a href=""></a>    \(part) janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(part, <span class="at">case =</span> <span class="st">"snake"</span>)</span>
-<span id="cb74-10"><a href=""></a>  )</span>
-<span id="cb74-11"><a href=""></a></span>
-<span id="cb74-12"><a href=""></a>  <span class="co"># Reconstruct paths</span></span>
-<span id="cb74-13"><a href=""></a>  paths_clean <span class="ot">&lt;-</span> <span class="fu">path_join</span>(parts_clean)</span>
-<span id="cb74-14"><a href=""></a></span>
-<span id="cb74-15"><a href=""></a>  <span class="co"># Get extensions</span></span>
-<span id="cb74-16"><a href=""></a>  exts <span class="ot">&lt;-</span> <span class="fu">path_ext</span>(paths) <span class="sc">|&gt;</span></span>
-<span id="cb74-17"><a href=""></a>    <span class="co"># Remove blanks</span></span>
-<span id="cb74-18"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_subset</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">S"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb74-19"><a href=""></a>    <span class="co"># Remove duplicates</span></span>
-<span id="cb74-20"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_unique</span>() <span class="sc">|&gt;</span></span>
-<span id="cb74-21"><a href=""></a>    <span class="co"># Make lowercase</span></span>
-<span id="cb74-22"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_to_lower</span>()</span>
-<span id="cb74-23"><a href=""></a></span>
-<span id="cb74-24"><a href=""></a>  <span class="co"># Make dynamic regex pattern including extensions</span></span>
-<span id="cb74-25"><a href=""></a>  pattern <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"_(?=("</span>, <span class="fu">paste</span>(exts, <span class="at">collapse =</span> <span class="st">"|"</span>), <span class="st">")$)"</span>)</span>
-<span id="cb74-26"><a href=""></a></span>
-<span id="cb74-27"><a href=""></a>  <span class="co"># Replace underscore before ext with period and make R uppercase</span></span>
-<span id="cb74-28"><a href=""></a>  paths_clean <span class="ot">&lt;-</span> paths_clean <span class="sc">|&gt;</span> </span>
-<span id="cb74-29"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_replace</span>(pattern, <span class="st">"."</span>) <span class="sc">|&gt;</span></span>
-<span id="cb74-30"><a href=""></a>    <span class="co"># Capitalize R folder name</span></span>
-<span id="cb74-31"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"/r(?=/|$)"</span>, <span class="st">"/R"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb74-32"><a href=""></a>    <span class="co"># Capitalize R extension</span></span>
-<span id="cb74-33"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.r"</span>, <span class="st">".R"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb74-34"><a href=""></a>    <span class="co"># Make fs_path again</span></span>
-<span id="cb74-35"><a href=""></a>    <span class="fu">path</span>()</span>
-<span id="cb74-36"><a href=""></a></span>
-<span id="cb74-37"><a href=""></a>  <span class="fu">return</span>(paths_clean)</span>
-<span id="cb74-38"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a>clean_paths <span class="ot">&lt;-</span> <span class="cf">function</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb77-2"><a href=""></a>  <span class="co"># Split paths into parts</span></span>
+<span id="cb77-3"><a href=""></a>  paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> recurse)</span>
+<span id="cb77-4"><a href=""></a>  parts <span class="ot">&lt;-</span> <span class="fu">path_split</span>(paths)</span>
+<span id="cb77-5"><a href=""></a></span>
+<span id="cb77-6"><a href=""></a>  <span class="co"># Clean to snake_case</span></span>
+<span id="cb77-7"><a href=""></a>  parts_clean <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(</span>
+<span id="cb77-8"><a href=""></a>    parts,</span>
+<span id="cb77-9"><a href=""></a>    \(part) janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(part, <span class="at">case =</span> <span class="st">"snake"</span>)</span>
+<span id="cb77-10"><a href=""></a>  )</span>
+<span id="cb77-11"><a href=""></a></span>
+<span id="cb77-12"><a href=""></a>  <span class="co"># Reconstruct paths</span></span>
+<span id="cb77-13"><a href=""></a>  paths_clean <span class="ot">&lt;-</span> <span class="fu">path_join</span>(parts_clean)</span>
+<span id="cb77-14"><a href=""></a></span>
+<span id="cb77-15"><a href=""></a>  <span class="co"># Get extensions</span></span>
+<span id="cb77-16"><a href=""></a>  exts <span class="ot">&lt;-</span> <span class="fu">path_ext</span>(paths) <span class="sc">|&gt;</span></span>
+<span id="cb77-17"><a href=""></a>    <span class="co"># Remove blanks</span></span>
+<span id="cb77-18"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_subset</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">S"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb77-19"><a href=""></a>    <span class="co"># Remove duplicates</span></span>
+<span id="cb77-20"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_unique</span>() <span class="sc">|&gt;</span></span>
+<span id="cb77-21"><a href=""></a>    <span class="co"># Make lowercase</span></span>
+<span id="cb77-22"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_to_lower</span>()</span>
+<span id="cb77-23"><a href=""></a></span>
+<span id="cb77-24"><a href=""></a>  <span class="co"># Make dynamic regex pattern including extensions</span></span>
+<span id="cb77-25"><a href=""></a>  pattern <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"_(?=("</span>, <span class="fu">paste</span>(exts, <span class="at">collapse =</span> <span class="st">"|"</span>), <span class="st">")$)"</span>)</span>
+<span id="cb77-26"><a href=""></a></span>
+<span id="cb77-27"><a href=""></a>  <span class="co"># Replace underscore before ext with period and make R uppercase</span></span>
+<span id="cb77-28"><a href=""></a>  paths_clean <span class="ot">&lt;-</span> paths_clean <span class="sc">|&gt;</span> </span>
+<span id="cb77-29"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_replace</span>(pattern, <span class="st">"."</span>) <span class="sc">|&gt;</span></span>
+<span id="cb77-30"><a href=""></a>    <span class="co"># Capitalize R folder name</span></span>
+<span id="cb77-31"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"/r(?=/|$)"</span>, <span class="st">"/R"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb77-32"><a href=""></a>    <span class="co"># Capitalize R extension</span></span>
+<span id="cb77-33"><a href=""></a>    stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.r"</span>, <span class="st">".R"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb77-34"><a href=""></a>    <span class="co"># Make fs_path again</span></span>
+<span id="cb77-35"><a href=""></a>    <span class="fu">path</span>()</span>
+<span id="cb77-36"><a href=""></a></span>
+<span id="cb77-37"><a href=""></a>  <span class="fu">return</span>(paths_clean)</span>
+<span id="cb77-38"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="clean_paths-results" class="slide level2">
 <h2><code>clean_paths()</code> results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="co"># Start fresh</span></span>
-<span id="cb75-2"><a href=""></a><span class="fu">source</span>(<span class="st">"demo/generate-spooky-folder.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>demo/spooky-folder
-├── Data
-│   ├── ghost-viz.R
-│   ├── Pumpkin-Stats.CSV
-│   ├── skeletonReport.doc
-│   ├── skeletonReport.qmd
-│   ├── vampireBATS.txt
-│   └── WITCH_list.docx
-├── images
-│   └── witchCauldron.png
-├── Misc Files
-│   └── BlackCats.png
-├── misc-files
-├── R
-│   ├── ghost data (final) v2.CSV
-│   ├── haunted_house.xlsx
-│   └── untitled 10 31.R
-└── REPORTS
-    ├── ghost data (final).CSV
-    └── ghost data.csv</code></pre>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="co"># Start fresh</span></span>
+<span id="cb78-2"><a href=""></a><span class="fu">source</span>(<span class="st">"demo/generate-spooky-folder.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a>paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky-folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb77-2"><a href=""></a></span>
-<span id="cb77-3"><a href=""></a><span class="co"># Run function</span></span>
-<span id="cb77-4"><a href=""></a>paths_clean <span class="ot">&lt;-</span> <span class="fu">clean_paths</span>(<span class="st">"demo/spooky-folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky-folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb79-2"><a href=""></a></span>
+<span id="cb79-3"><a href=""></a><span class="co"># Run function</span></span>
+<span id="cb79-4"><a href=""></a>paths_clean <span class="ot">&lt;-</span> <span class="fu">clean_paths</span>(<span class="st">"demo/spooky-folder"</span>)</span>
+<span id="cb79-5"><a href=""></a>paths_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>demo/spooky_folder/data
+demo/spooky_folder/data/ghost_viz.R
+demo/spooky_folder/data/pumpkin_stats.csv
+demo/spooky_folder/data/skeleton_report.doc
+demo/spooky_folder/data/skeleton_report.qmd
+demo/spooky_folder/data/vampire_bats.txt
+demo/spooky_folder/data/witch_list.docx
+demo/spooky_folder/images
+demo/spooky_folder/images/witch_cauldron.png
+demo/spooky_folder/misc_files
+demo/spooky_folder/misc_files/black_cats.png
+demo/spooky_folder/R
+demo/spooky_folder/R/ghost_data_final_v2.csv
+demo/spooky_folder/R/haunted_house.xlsx
+demo/spooky_folder/R/untitled_10_31.R
+demo/spooky_folder/reports
+demo/spooky_folder/reports/ghost_data_final.csv
+demo/spooky_folder/reports/ghost_data.csv</code></pre>
+</div>
 </div>
 </section>
 <section id="rename-files-function" class="slide level2">
 <h2>Rename files function</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a>rename_files <span class="ot">&lt;-</span> <span class="cf">function</span>(old_paths, new_paths) {</span>
-<span id="cb78-2"><a href=""></a>  <span class="co"># Get parent folders</span></span>
-<span id="cb78-3"><a href=""></a>  parents <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">path_dir</span>(new_paths))</span>
-<span id="cb78-4"><a href=""></a>  </span>
-<span id="cb78-5"><a href=""></a>  <span class="co"># Create parent folders</span></span>
-<span id="cb78-6"><a href=""></a>  <span class="fu">dir_create</span>(parents)</span>
-<span id="cb78-7"><a href=""></a>  </span>
-<span id="cb78-8"><a href=""></a>  <span class="co"># Filter out folders from files</span></span>
-<span id="cb78-9"><a href=""></a>  old_paths <span class="ot">&lt;-</span> <span class="fu">subset</span>(old_paths, <span class="sc">!</span><span class="fu">is_dir</span>(old_paths))</span>
-<span id="cb78-10"><a href=""></a>  new_paths <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_paths, <span class="sc">!</span><span class="fu">is_dir</span>(new_paths))</span>
-<span id="cb78-11"><a href=""></a></span>
-<span id="cb78-12"><a href=""></a>    <span class="co"># Rename files</span></span>
-<span id="cb78-13"><a href=""></a>  <span class="fu">file_move</span>(old_paths, new_paths)</span>
-<span id="cb78-14"><a href=""></a>  </span>
-<span id="cb78-15"><a href=""></a>  <span class="co"># See results</span></span>
-<span id="cb78-16"><a href=""></a>  <span class="fu">dir_tree</span>(<span class="fu">path_common</span>(new_paths))</span>
-<span id="cb78-17"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a>rename_files <span class="ot">&lt;-</span> <span class="cf">function</span>(old_paths, new_paths) {</span>
+<span id="cb81-2"><a href=""></a>  <span class="co"># Get parent folders</span></span>
+<span id="cb81-3"><a href=""></a>  parents <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">path_dir</span>(new_paths))</span>
+<span id="cb81-4"><a href=""></a>  </span>
+<span id="cb81-5"><a href=""></a>  <span class="co"># Create parent folders</span></span>
+<span id="cb81-6"><a href=""></a>  parents <span class="sc">|&gt;</span> </span>
+<span id="cb81-7"><a href=""></a>    purrr<span class="sc">::</span><span class="fu">map</span>(\(x) {</span>
+<span id="cb81-8"><a href=""></a>      <span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir_exists</span>(x)) {</span>
+<span id="cb81-9"><a href=""></a>        <span class="fu">dir_create</span>(x)</span>
+<span id="cb81-10"><a href=""></a>      }</span>
+<span id="cb81-11"><a href=""></a>    })</span>
+<span id="cb81-12"><a href=""></a>  </span>
+<span id="cb81-13"><a href=""></a>  <span class="co"># Filter out folders from files</span></span>
+<span id="cb81-14"><a href=""></a>  old_paths <span class="ot">&lt;-</span> <span class="fu">subset</span>(old_paths, <span class="sc">!</span><span class="fu">is_dir</span>(old_paths))</span>
+<span id="cb81-15"><a href=""></a>  new_paths <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_paths, <span class="sc">!</span><span class="fu">is_dir</span>(new_paths))</span>
+<span id="cb81-16"><a href=""></a></span>
+<span id="cb81-17"><a href=""></a>    <span class="co"># Rename files</span></span>
+<span id="cb81-18"><a href=""></a>  <span class="fu">file_move</span>(old_paths, new_paths)</span>
+<span id="cb81-19"><a href=""></a>  </span>
+<span id="cb81-20"><a href=""></a>  <span class="co"># See results</span></span>
+<span id="cb81-21"><a href=""></a>  <span class="fu">dir_tree</span>(<span class="fu">path_common</span>(new_paths))</span>
+<span id="cb81-22"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><code>path_common()</code> returns the path common to all the paths passed as input.</p>
+</div>
+</div>
 </div>
 </section>
 <section id="rename_files-results" class="slide level2">
 <h2><code>rename_files()</code> results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a><span class="fu">rename_files</span>(paths, paths_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a><span class="fu">rename_files</span>(paths, paths_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky_folder
 ├── data
@@ -1392,30 +1465,30 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 <section id="organize-files-function" class="slide level2">
 <h2>Organize files function</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a>organize_files <span class="ot">&lt;-</span> <span class="cf">function</span>(folder) {</span>
-<span id="cb81-2"><a href=""></a>  <span class="co"># List subdirectories and extensions</span></span>
-<span id="cb81-3"><a href=""></a>  data <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.csv|*.xlsx"</span>)</span>
-<span id="cb81-4"><a href=""></a>  images <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.png"</span>)</span>
-<span id="cb81-5"><a href=""></a>  misc_files <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.txt"</span>)</span>
-<span id="cb81-6"><a href=""></a>  r <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.R"</span>)</span>
-<span id="cb81-7"><a href=""></a>  reports <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.doc|*.docx|*.qmd"</span>)</span>
-<span id="cb81-8"><a href=""></a></span>
-<span id="cb81-9"><a href=""></a>  <span class="co"># Move files</span></span>
-<span id="cb81-10"><a href=""></a>  <span class="fu">file_move</span>(data, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/data"</span>)))</span>
-<span id="cb81-11"><a href=""></a>  <span class="fu">file_move</span>(images, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/images"</span>)))</span>
-<span id="cb81-12"><a href=""></a>  <span class="fu">file_move</span>(misc_files, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/misc_files"</span>)))</span>
-<span id="cb81-13"><a href=""></a>  <span class="fu">file_move</span>(r, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/R"</span>)))</span>
-<span id="cb81-14"><a href=""></a>  <span class="fu">file_move</span>(reports, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/reports"</span>)))</span>
-<span id="cb81-15"><a href=""></a></span>
-<span id="cb81-16"><a href=""></a>  <span class="co"># See results</span></span>
-<span id="cb81-17"><a href=""></a>  <span class="fu">dir_tree</span>(folder)</span>
-<span id="cb81-18"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a>organize_files <span class="ot">&lt;-</span> <span class="cf">function</span>(folder) {</span>
+<span id="cb84-2"><a href=""></a>  <span class="co"># List subdirectories and extensions</span></span>
+<span id="cb84-3"><a href=""></a>  data <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.csv|*.xlsx"</span>)</span>
+<span id="cb84-4"><a href=""></a>  images <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.png"</span>)</span>
+<span id="cb84-5"><a href=""></a>  misc_files <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.txt"</span>)</span>
+<span id="cb84-6"><a href=""></a>  r <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.R"</span>)</span>
+<span id="cb84-7"><a href=""></a>  reports <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(folder, <span class="at">recurse =</span> <span class="cn">TRUE</span>, <span class="at">glob =</span> <span class="st">"*.doc|*.docx|*.qmd"</span>)</span>
+<span id="cb84-8"><a href=""></a></span>
+<span id="cb84-9"><a href=""></a>  <span class="co"># Move files</span></span>
+<span id="cb84-10"><a href=""></a>  <span class="fu">file_move</span>(data, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/data"</span>)))</span>
+<span id="cb84-11"><a href=""></a>  <span class="fu">file_move</span>(images, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/images"</span>)))</span>
+<span id="cb84-12"><a href=""></a>  <span class="fu">file_move</span>(misc_files, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/misc_files"</span>)))</span>
+<span id="cb84-13"><a href=""></a>  <span class="fu">file_move</span>(r, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/R"</span>)))</span>
+<span id="cb84-14"><a href=""></a>  <span class="fu">file_move</span>(reports, <span class="fu">path</span>(stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{folder}/reports"</span>)))</span>
+<span id="cb84-15"><a href=""></a></span>
+<span id="cb84-16"><a href=""></a>  <span class="co"># See results</span></span>
+<span id="cb84-17"><a href=""></a>  <span class="fu">dir_tree</span>(folder)</span>
+<span id="cb84-18"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="organize_files-results" class="slide level2">
 <h2><code>organize_files()</code> results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a><span class="fu">organize_files</span>(<span class="st">"demo/spooky_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a><span class="fu">organize_files</span>(<span class="st">"demo/spooky_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>demo/spooky_folder
 ├── data
@@ -1442,34 +1515,137 @@ demo/spooky_folder/reports/ghost_data.csv</code></pre>
 <section id="full-cleaning-function-workflow" class="slide level2">
 <h2>Full cleaning function workflow</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a><span class="co"># Start fresh</span></span>
-<span id="cb84-2"><a href=""></a><span class="fu">source</span>(<span class="st">"demo/generate-spooky-folder.R"</span>)</span>
-<span id="cb84-3"><a href=""></a>paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky-folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb84-4"><a href=""></a></span>
-<span id="cb84-5"><a href=""></a><span class="co"># Run function</span></span>
-<span id="cb84-6"><a href=""></a>paths_clean <span class="ot">&lt;-</span> <span class="fu">clean_paths</span>(<span class="st">"demo/spooky-folder"</span>)</span>
-<span id="cb84-7"><a href=""></a>paths_clean</span>
-<span id="cb84-8"><a href=""></a></span>
-<span id="cb84-9"><a href=""></a><span class="co"># Review paths_clean before running the next functions!</span></span>
-<span id="cb84-10"><a href=""></a><span class="fu">rename_files</span>(paths, paths_clean)</span>
-<span id="cb84-11"><a href=""></a><span class="fu">organize_files</span>(<span class="st">"demo/spooky_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a><span class="co"># Start fresh</span></span>
+<span id="cb87-2"><a href=""></a><span class="fu">source</span>(<span class="st">"demo/generate-spooky-folder.R"</span>)</span>
+<span id="cb87-3"><a href=""></a></span>
+<span id="cb87-4"><a href=""></a><span class="co"># Get paths to clean</span></span>
+<span id="cb87-5"><a href=""></a>paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="st">"demo/spooky-folder"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb87-6"><a href=""></a></span>
+<span id="cb87-7"><a href=""></a><span class="co"># Run function</span></span>
+<span id="cb87-8"><a href=""></a>paths_clean <span class="ot">&lt;-</span> <span class="fu">clean_paths</span>(<span class="st">"demo/spooky-folder"</span>)</span>
+<span id="cb87-9"><a href=""></a>paths_clean</span>
+<span id="cb87-10"><a href=""></a></span>
+<span id="cb87-11"><a href=""></a><span class="co"># Review paths_clean before running the next functions!</span></span>
+<span id="cb87-12"><a href=""></a><span class="fu">rename_files</span>(paths, paths_clean)</span>
+<span id="cb87-13"><a href=""></a><span class="fu">organize_files</span>(<span class="st">"demo/spooky_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
-<section id="query-folder-and-file-information" class="title-slide slide level1 section center">
-<h1>Query folder and file information</h1>
+<section id="bonus-content" class="title-slide slide level1 section center">
+<h1>Bonus content</h1>
 
 </section>
+<section id="query-folder-and-file-information" class="slide level2">
+<h2>Query folder and file information</h2>
+<p>Use <code>file_info()</code> to get a tibble</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a>files <span class="ot">&lt;-</span> <span class="fu">file_info</span>(<span class="fu">dir_ls</span>(<span class="st">"demo"</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb88-2"><a href=""></a>files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 51 × 18
+   path                type     size permissions modification_time   user  group
+   &lt;fs::path&gt;          &lt;fct&gt; &lt;fs::b&gt; &lt;fs::perms&gt; &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;
+ 1 …code-from-slides.R file    7.75K rw-         2025-10-29 13:36:14 &lt;NA&gt;  &lt;NA&gt; 
+ 2 …te-spooky-folder.R file      888 rw-         2025-10-29 14:51:06 &lt;NA&gt;  &lt;NA&gt; 
+ 3 …her-scary-analysis dire…       0 rw-         2025-10-29 15:12:09 &lt;NA&gt;  &lt;NA&gt; 
+ 4 …cary-analysis/data dire…       0 rw-         2025-10-29 15:12:09 &lt;NA&gt;  &lt;NA&gt; 
+ 5 …sis/data/processed dire…       0 rw-         2025-10-29 15:12:09 &lt;NA&gt;  &lt;NA&gt; 
+ 6 …-analysis/data/raw dire…       0 rw-         2025-10-29 15:12:09 &lt;NA&gt;  &lt;NA&gt; 
+ 7 …ry-analysis/images dire…       0 rw-         2025-10-29 15:12:09 &lt;NA&gt;  &lt;NA&gt; 
+ 8 …ry-analysis/output dire…       0 rw-         2025-10-29 15:12:09 &lt;NA&gt;  &lt;NA&gt; 
+ 9 …y-analysis/reports dire…       0 rw-         2025-10-29 15:12:09 &lt;NA&gt;  &lt;NA&gt; 
+10 …scary-analysis/src dire…       0 rw-         2025-10-29 15:12:09 &lt;NA&gt;  &lt;NA&gt; 
+# ℹ 41 more rows
+# ℹ 11 more variables: device_id &lt;dbl&gt;, hard_links &lt;dbl&gt;,
+#   special_device_id &lt;dbl&gt;, inode &lt;dbl&gt;, block_size &lt;dbl&gt;, blocks &lt;dbl&gt;,
+#   flags &lt;int&gt;, generation &lt;dbl&gt;, access_time &lt;dttm&gt;, change_time &lt;dttm&gt;,
+#   birth_time &lt;dttm&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="use-that-tibble-within-a-tidyverse-workflow" class="slide level2">
+<h2>Use that tibble within a tidyverse workflow</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a>files <span class="sc">|&gt;</span> </span>
+<span id="cb90-2"><a href=""></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">"directory"</span> <span class="sc">|</span> stringr<span class="sc">::</span><span class="fu">str_detect</span>(path, <span class="st">".R"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb90-3"><a href=""></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(path, type, size, birth_time, modification_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 40 × 5
+   path                    type     size birth_time          modification_time  
+   &lt;fs::path&gt;              &lt;fct&gt; &lt;fs::b&gt; &lt;dttm&gt;              &lt;dttm&gt;             
+ 1 demo/code-from-slides.R file    7.75K 2025-10-28 15:13:31 2025-10-29 13:36:14
+ 2 …nerate-spooky-folder.R file      888 2025-10-05 19:05:07 2025-10-29 14:51:06
+ 3 …o/other-scary-analysis dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 4 …er-scary-analysis/data dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 5 …nalysis/data/processed dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 6 …cary-analysis/data/raw dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 7 …-scary-analysis/images dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 8 …-scary-analysis/output dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 9 …scary-analysis/reports dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+10 …her-scary-analysis/src dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+# ℹ 30 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="or-a-base-r-workflow" class="slide level2">
+<h2>Or a base R workflow</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href=""></a>files[</span>
+<span id="cb92-2"><a href=""></a>  files<span class="sc">$</span>type <span class="sc">==</span> <span class="st">"directory"</span> <span class="sc">|</span> <span class="fu">grepl</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.R$"</span>, files<span class="sc">$</span>path),</span>
+<span id="cb92-3"><a href=""></a>  <span class="fu">c</span>(<span class="st">"path"</span>, <span class="st">"type"</span>, <span class="st">"size"</span>, <span class="st">"birth_time"</span>, <span class="st">"modification_time"</span>)</span>
+<span id="cb92-4"><a href=""></a>  ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 40 × 5
+   path                    type     size birth_time          modification_time  
+   &lt;fs::path&gt;              &lt;fct&gt; &lt;fs::b&gt; &lt;dttm&gt;              &lt;dttm&gt;             
+ 1 demo/code-from-slides.R file    7.75K 2025-10-28 15:13:31 2025-10-29 13:36:14
+ 2 …nerate-spooky-folder.R file      888 2025-10-05 19:05:07 2025-10-29 14:51:06
+ 3 …o/other-scary-analysis dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 4 …er-scary-analysis/data dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 5 …nalysis/data/processed dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 6 …cary-analysis/data/raw dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 7 …-scary-analysis/images dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 8 …-scary-analysis/output dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+ 9 …scary-analysis/reports dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+10 …her-scary-analysis/src dire…       0 2025-10-29 15:12:09 2025-10-29 15:12:09
+# ℹ 30 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="code-snippets" class="slide level2">
+<h2>Code snippets</h2>
+<p><strong>Use code snippets in an RStudio project to set up folder scaffolding!</strong></p>
+<div>
+<ol type="1">
+<li><p>Create new RStudio Project</p></li>
+<li><p>Go to <code>Tools</code> &gt; <code>Edit Code Snippets...</code> &gt; <code>R</code></p></li>
+<li><p>Paste the following (with this exact tabbing):</p></li>
+</ol>
+<pre><code>snippet project
+    fs::dir_create(
+        c("data/raw", "data/processed", "images", "R", "reports", "output")
+    )</code></pre>
+<ol start="4" type="1">
+<li>To use, type <code>project</code> in an R script or in the Console and then press <code>Shift+Tab</code>.</li>
+</ol>
+</div>
+</section>
+
 <section id="resources" class="slide level2" data-background-color="black" data-background-image="https://images.unsplash.com/photo-1570527976677-a6d99d170d5d?ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;q=80&amp;w=1170" data-background-opacity="0.3">
 <h2>Resources</h2>
 <div>
 <div style="font-size:1.4em">
 <ul>
+<li><a href="https://fs.r-lib.org/index.html">{fs} pkgdown website</a></li>
 <li>Guest blog post &amp; accompanying video tutorial for R for the Rest of Us <a href="https://rfortherestofus.com/2025/01/fs-file-management"><em>Automate file management in R with the {fs} package</em></a></li>
 <li>Danielle Navarro’s <a href="https://blog.djnavarro.net/posts/2024-10-06_fs/"><em>For fs</em> blog post</a></li>
 <li>Jenny Bryan’s <a href="https://github.com/jennybc/how-to-name-files"><em>How to Name Files Like a Normie</em> slides</a></li>
+<li><a href="https://stringr.tidyverse.org/articles/regular-expressions.html">{stringr} regular expressions article</a></li>
 </ul>
 </div>
+</div>
+<div class="footer">
+<p>Photo by Bee Felten-Leidel on Unsplash</p>
 </div>
 </section>
 <section id="thank-you" class="slide level2">

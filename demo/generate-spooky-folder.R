@@ -27,11 +27,12 @@ files <- c(
 
 # Randomly assign files to subdirectories
 set.seed(1031) # Halloween 🎃
-for (file in files) {
-  dir_choice <- sample(subdirs, 1)
-  file_path <- path(root_dir, dir_choice, file)
-  file_create(file_path)
-}
+files |>
+  purrr::map(\(file) {
+    dir_choice <- sample(subdirs, 1)
+    file_path <- path(root_dir, dir_choice, file)
+    file_create(file_path)
+  })
 
 # Print result
 dir_tree(root_dir)

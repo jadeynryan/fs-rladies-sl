@@ -78,6 +78,30 @@ fig-alt="xkcdc omic of person standing behind another person looking at their do
 :::
 :::::
 
+## Want to follow along?
+
+Download these two R scripts from this workshop's GitHub repo
+
+<https://github.com/jadeynryan/fs-rladies-sl/tree/main>
+
+<br>
+
+[demo/generate-spooky-folder.R](https://github.com/jadeynryan/fs-rladies-sl/blob/main/demo/generate-spooky-folder.R)
+
+<br>  
+
+```{r}
+#| eval: false
+quarto::qmd_to_r_script("slides.qmd", script = "demo/code-from-slides.R")
+```
+
+[demo/code-from-slides.R](https://github.com/jadeynryan/fs-rladies-sl/blob/main/demo/code-from-slides.R)  
+
+<br>
+
+Or, you can copy code chunks from these slides into an R script:  
+<https://jadeyryan.quarto.pub/fs-rladies-sl/>
+
 ## What's wrong with this folder?
 
 ```{r}
@@ -93,6 +117,10 @@ source("demo/generate-spooky-folder.R")
 -   Difficult to know which is *actually* the final version
 :::
 
+::: footer
+Photo by Alpha Perspective on Unsplash
+:::
+
 ## Woes of inconsistent, poorly named files {background-color="black" background-image="https://images.unsplash.com/photo-1472496175377-b5d7625d4ba9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2080" background-opacity="0.4"}
 
 ::: {style="font-size:1.8em"}
@@ -101,6 +129,10 @@ source("demo/generate-spooky-folder.R")
 -   Nightmare for collaborators and your future self
 -   Errors from using outdated versions
 -   Wastes time and energy
+:::
+
+::: footer
+Photo by Sašo Tušar on Unsplash
 :::
 
 ## Meet {fs}
@@ -133,6 +165,10 @@ source("demo/generate-spooky-folder.R")
 -   [{fs} function reference](https://fs.r-lib.org/reference/index.html)
 :::
 
+::: footer
+Photo by Reba Spike on Unsplash
+:::
+
 ::: notes
 -   Directories are like file cabinets that hold folders and files.
 -   Links are references to other files or directories.
@@ -163,8 +199,8 @@ article](https://fs.r-lib.org/articles/function-comparisons.html).
 ## Get started
 
 ```{r}
-# install.packages("fs")
 library("fs")
+# recurse = how many levels of subdirectories to compute on. recurse = TRUE means all of them.
 dir_tree(recurse = 2)
 ```
 
@@ -205,7 +241,7 @@ path_abs(path)
 
 ## Check for existence
 
-**Check if spooky-cat.png exists**
+**Check if spooky-cat.png exists in the halloween folder**
 
 ```{r}
 file_exists(path)
@@ -258,10 +294,8 @@ if (dir_exists(root)) {
 
 ```{r}
 root <- path("demo", "scary-analysis")
-dir_create("demo", "scary-analysis")
+dir_create(root)
 ```
-
-<br>
 
 . . . 
 
@@ -272,9 +306,14 @@ subdirs <- c("R", "data/raw", "data/processed", "output", "reports", "images")
 dir_create(root, subdirs)
 ```
 
-<br>
-
 . . . 
+
+::: callout-warning
+Must pass vector of names to `dir_create`. Otherwise,
+`dir_create(root, "R", "data/raw", "data/processed", "output", "reports", "images")` will result in this folder path: `scary-analysis/R/data/raw/data/processed/output/reports/images/`.
+:::
+
+. . .
 
 **Create files**
 
@@ -309,6 +348,8 @@ dir_copy(path = "demo/scary-analysis",
          new_path = "demo/other-scary-analysis")
 ```
 
+**Files and directories exist in both locations with `dir_copy()`**
+
 :::: {.columns}
 ::: {.column width="50%"}
 ```{r}
@@ -325,15 +366,30 @@ dir_tree("demo/other-scary-analysis")
 
 ## Copy safely
 
+**By default, `file_copy()` will fail if the file already exists.**
+
 ```{r}
 #| error: true
 file_copy("demo/scary-analysis/R/01-load-data.R",
           "demo/other-scary-analysis/R/01-load-data.R")
 ```
 
+<br>
+
+. . .
+
+**Unless, you use `overwrite = TRUE`.**
+
+```{r}
+file_copy("demo/scary-analysis/R/01-load-data.R",
+          "demo/other-scary-analysis/R/01-load-data.R",
+          overwrite = TRUE)
+```
+
+
 ## Move
 
-**Create a new folder to move scripts into**
+**Create a new `src` folder to move scripts into**
 
 ```{r}
 dir_create("demo/scary-analysis/src")
@@ -343,7 +399,7 @@ dir_create("demo/scary-analysis/src")
 
 . . .
 
-**List all scripts in R folder**
+**List all scripts in R folder with `dir_ls()`**
 
 ```{r}
 scripts <- dir_ls("demo/scary-analysis/R")
@@ -361,11 +417,15 @@ file_move(path = scripts, new_path = "demo/scary-analysis/src")
 
 ## Move results
 
+**R scripts are now only in the `src` folder after being moved from the `R` folder**
+
 ```{r}
 dir_tree("demo/scary-analysis")
 ```
 
 ## Rename with move
+
+**Use `file_move()` to rename directories and files**
 
 ```{r}
 file_move(path = "demo/other-scary-analysis/R",
@@ -374,7 +434,13 @@ file_move(path = "demo/other-scary-analysis/R",
 dir_tree("demo/other-scary-analysis")
 ```
 
+::: callout-note
+If the goal is to rename a folder, don't use `dir_create()` first like we did in the last example. Just use `file_move()` in one step.
+:::
+
 ## Delete
+
+**Delete the empty R folder from the first move example with `dir_delete()`**
 
 ```{r}
 dir_delete("demo/scary-analysis/R")
@@ -391,6 +457,8 @@ dir_tree("demo/spooky-folder/")
 
 ## Naming conventions
 
+What do you use for folders and files? Is this standardized within just your projects? Team? Organization?
+
 ![Artwork by [Allison Horst](https://allisonhorst.com/)](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/dbb99049-2916-4bc8-824f-1816f5c4f06d_rw_1920.png?h=f0b45a30ba31ad414562d1085cd6c172){fig-alt='Cartoon representations of common cases in coding. A snake screams "SCREAMING_SNAKE_CASE" into the face of a camel (wearing ear muffs) with "camelCase" written along its back. Vegetables on a skewer spell out "kebab-case" (words on a skewer). A mellow, happy looking snake has text "snake_case" along it.'}
 
 ## Meet {janitor} 
@@ -404,8 +472,12 @@ files_old <- dir_ls("demo/spooky-folder/", recurse = TRUE)
 files_new <- janitor::make_clean_names(files_old, case = "snake")
 ```
 
-::: callout-warning
-You could just use {stringr} for cleaning, but {janitor} is more comprehensive. See the [`make_clean_names()` docs](https://sfirke.github.io/janitor/reference/make_clean_names.html).
+::: callout-note
+You could just use {stringr} for cleaning, but {janitor} is more comprehensive so you don't need to write as much regex. 
+
+E.g., `myImportantFile` would be be cleaned to `my_important_file`.
+
+See the [`make_clean_names()` docs](https://sfirke.github.io/janitor/reference/make_clean_names.html).
 
 Arguments that might come in handy: `case`, `replace`, `parsing_option`, `abbreviations`, `sep_out`.
 :::
@@ -431,7 +503,7 @@ files_new
 
 ## Split, clean, and reconstruct
 
-**Split directory, name, and extension**
+**To avoid the separators being turned into underscores, let's split the directory, name, and extension with `path_split()`**
 
 ```{r}
 paths <- dir_ls("demo/spooky-folder/", recurse = TRUE)
@@ -476,6 +548,8 @@ paths_clean
 
 ## {fs} meets {stringr}
 
+**Use `path_ext()` to get the extensions and {stringr} to replace the underscore before the extension with a period**
+
 ```{r}
 paths_almost_clean <- paths_clean
 
@@ -499,7 +573,7 @@ paths_clean <- stringr::str_replace(paths_almost_clean, pattern, ".") |>
 
 ## Always check files before renaming!
 
-Yay! Let's just fix the R folder and extensions.
+Yay! Let's just re-capitalize the R folder and .R extensions.
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -540,15 +614,13 @@ file_move(path = paths, new_path = paths_clean)
 
 <br>
 
-. . .
-
 ::: callout-warning
 {fs} gotcha! `file_move()` and `file_copy()` don't automatically create parent folders!
 :::
 
 ## Create parent folders first
 
-**Get the parent folders**
+**Get the parent folders with `path_dir()`**
 
 ```{r}
 parents <- unique(path_dir(paths_clean))
@@ -557,15 +629,20 @@ parents
 
 . . .
 
-**Create the parent folders**
+**Create the parent folders if they don't already exist**
 
 ```{r}
-dir_create(parents)
+parents |> 
+  purrr::map(\(x) {
+    if (!dir_exists(x)) {
+      dir_create(x)
+    }
+  })
 ```
 
 ## Complete the renaming
 
-**Filter out folders**
+**Filter out folders from current paths and new paths with `!is_dir()`**
 
 ```{r}
 paths <- subset(paths, !is_dir(paths))
@@ -641,15 +718,16 @@ dir_tree("demo/spooky_folder")
 
 1. Review folder with `dir_tree()` to inspect structure and naming inconsistencies
 2. Plan new conventions (e.g., snake_case)
-3. Generate new names with {janitor} and/or {stringr}
-4. ⚠️**Review first before renaming!**⚠️
-5. Create new parent folders with `dir_create()`
-6. Filter out folders from old and new path vectors
-7. Move files with `file_move()`
-8. Review again with `dir_tree()`
-9. Final manual edits (e.g., "untitled_10_31.R")
+3. Initial manual edits (e.g., untitled.R)
+4. Generate new names with {janitor} and/or {stringr}
+5. ⚠️**Review first before renaming!**⚠️
+6. Create new parent folders with `dir_create()`
+7. Filter out folders from old and new path vectors
+8. Move files with `file_move()`
+9. Review again with `dir_tree()`
+10. Any final manual edits
 
-# Use functions to repeat this process {.section}
+# Use functions to repeat this process for multiple folders {.section}
 
 ## Clean paths function
 
@@ -697,12 +775,18 @@ clean_paths <- function(folder, recurse = TRUE) {
 ## `clean_paths()` results
 
 ```{r}
+#| output: false
 # Start fresh
 source("demo/generate-spooky-folder.R")
+```
+
+
+```{r}
 paths <- dir_ls("demo/spooky-folder", recurse = TRUE)
 
 # Run function
 paths_clean <- clean_paths("demo/spooky-folder")
+paths_clean
 ```
 
 ## Rename files function
@@ -713,7 +797,12 @@ rename_files <- function(old_paths, new_paths) {
   parents <- unique(path_dir(new_paths))
   
   # Create parent folders
-  dir_create(parents)
+  parents |> 
+    purrr::map(\(x) {
+      if (!dir_exists(x)) {
+        dir_create(x)
+      }
+    })
   
   # Filter out folders from files
   old_paths <- subset(old_paths, !is_dir(old_paths))
@@ -726,6 +815,10 @@ rename_files <- function(old_paths, new_paths) {
   dir_tree(path_common(new_paths))
 }
 ```
+
+::: callout-note
+`path_common()` returns the path common to all the paths passed as input.
+:::
 
 ## `rename_files()` results
 
@@ -768,6 +861,8 @@ organize_files("demo/spooky_folder")
 #| eval: false
 # Start fresh
 source("demo/generate-spooky-folder.R")
+
+# Get paths to clean
 paths <- dir_ls("demo/spooky-folder", recurse = TRUE)
 
 # Run function
@@ -779,17 +874,83 @@ rename_files(paths, paths_clean)
 organize_files("demo/spooky_folder")
 ```
 
-# Query folder and file information {.section}
+# Bonus content {.section}
+
+## Query folder and file information
+
+Use `file_info()` to get a tibble
+
+```{r}
+files <- file_info(dir_ls("demo", recurse = TRUE))
+files
+```
+
+## Use that tibble within a tidyverse workflow
+
+```{r}
+files |> 
+  dplyr::filter(type == "directory" | stringr::str_detect(path, ".R")) |> 
+  dplyr::select(path, type, size, birth_time, modification_time)
+```
+
+## Or a base R workflow
+
+```{r}
+files[
+  files$type == "directory" | grepl("\\.R$", files$path),
+  c("path", "type", "size", "birth_time", "modification_time")
+  ]
+```
+
+## Code snippets
+
+**Use code snippets in an RStudio project to set up folder scaffolding!**
+
+::: nonincremental
+
+1. Create new RStudio Project
+
+2. Go to `Tools` > `Edit Code Snippets...` > `R`
+
+3. Paste the following (with this exact tabbing):
+
+```
+snippet project
+	fs::dir_create(
+		c("data/raw", "data/processed", "images", "R", "reports", "output")
+	)
+```
+
+4. To use, type `project` in an R script or in the Console and then press `Shift+Tab`.
+
+:::
+
+## Cleanup {visibility="hidden"}
+
+```{r}
+#| echo: false
+
+# Cleanup
+dirs <- c("demo/scary-analysis", "demo/other-scary-analysis", "demo/spooky-folder", "demo/spooky_folder")
+dir_delete(dirs)
+```
+
 
 ## Resources {background-color="black" background-image="https://images.unsplash.com/photo-1570527976677-a6d99d170d5d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" background-opacity="0.3"}
 
 ::: nonincremental 
 ::: {style="font-size:1.4em"}
+-   [{fs} pkgdown website](https://fs.r-lib.org/index.html)
 -   Guest blog post & accompanying video tutorial for R for the Rest of Us [*Automate file management in R with the {fs} package*](https://rfortherestofus.com/2025/01/fs-file-management)
 -   Danielle Navarro's [*For fs* blog post](https://blog.djnavarro.net/posts/2024-10-06_fs/)
 -   Jenny Bryan's [*How to Name Files Like a
     Normie* slides](https://github.com/jennybc/how-to-name-files)
+- [{stringr} regular expressions article](https://stringr.tidyverse.org/articles/regular-expressions.html)
 :::
+:::
+
+::: footer
+Photo by Bee Felten-Leidel on Unsplash
 :::
 
 ## Thank you!
