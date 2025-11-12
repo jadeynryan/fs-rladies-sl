@@ -1,3 +1,5 @@
+# This script creates the messy folder we will be cleaning.
+
 library(fs)
 
 # Set up root directory

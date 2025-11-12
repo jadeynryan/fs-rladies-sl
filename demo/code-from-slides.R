@@ -1,6 +1,6 @@
 # Generated with:
 # quarto::qmd_to_r_script("slides.qmd", script = "demo/code-from-slides.R")
-
+#
 source("demo/generate-spooky-folder.R")
 
 
@@ -183,12 +183,12 @@ parents <- unique(path_dir(paths_clean))
 parents
 
 
-for (dir in parents) {
-  if (!dir_exists(dir)) {
-    dir_create(dir)
-  }
-}
-dir_create(parents)
+parents |>
+  purrr::map(\(x) {
+    if (!dir_exists(x)) {
+      dir_create(x)
+    }
+  })
 
 
 paths <- subset(paths, !is_dir(paths))
@@ -266,13 +266,16 @@ clean_paths <- function(folder, recurse = TRUE) {
   return(paths_clean)
 }
 
-
+#| output: false
 # Start fresh
 source("demo/generate-spooky-folder.R")
+
+
 paths <- dir_ls("demo/spooky-folder", recurse = TRUE)
 
 # Run function
 paths_clean <- clean_paths("demo/spooky-folder")
+paths_clean
 
 
 rename_files <- function(old_paths, new_paths) {
@@ -280,12 +283,12 @@ rename_files <- function(old_paths, new_paths) {
   parents <- unique(path_dir(new_paths))
 
   # Create parent folders
-  for (dir in parents) {
-    if (!dir_exists(dir)) {
-      dir_create(dir)
-    }
-  }
-  dir_create(parents)
+  parents |>
+    purrr::map(\(x) {
+      if (!dir_exists(x)) {
+        dir_create(x)
+      }
+    })
 
   # Filter out folders from files
   old_paths <- subset(old_paths, !is_dir(old_paths))
@@ -327,6 +330,8 @@ organize_files("demo/spooky_folder")
 #| eval: false
 # # Start fresh
 # source("demo/generate-spooky-folder.R")
+#
+# # Get paths to clean
 # paths <- dir_ls("demo/spooky-folder", recurse = TRUE)
 #
 # # Run function
