@@ -44,12 +44,12 @@ rename_files <- function(old_paths, new_paths) {
   parents <- unique(path_dir(new_paths))
 
   # Create parent folders
-  for (dir in parents) {
-    if (!dir_exists(dir)) {
-      dir_create(dir)
-    }
-  }
-  dir_create(parents)
+  parents |>
+    purrr::map(\(x) {
+      if (!dir_exists(x)) {
+        dir_create(x)
+      }
+    })
 
   # Filter out folders from files
   old_paths <- subset(old_paths, !is_dir(old_paths))
